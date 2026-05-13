@@ -1,0 +1,226 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ArticleCard from '../components/ArticleCard.astro';
+import ToolCard from '../components/ToolCard.astro';
+import { tools } from '../data/tools';
+import { CATEGORIES, categoryToSlug } from '../utils/categories';
+
+const allPosts = await getCollection('blog');
+const latestPosts = allPosts
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 6);
+
+const featuredPosts = allPosts
+  .filter((p) => p.data.importance === 'high')
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 3);
+
+const highlightTools = tools.filter((t) => t.mbd_relevance === 'high').slice(0, 4);
+---
+
+<BaseLayout title="ホーム">
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container hero-inner">
+      <div class="hero-label">Race Engineering × AI Tools</div>
+      <h1 class="hero-title">
+        MBD エンジニアのための<br />
+        AI ツール情報ラボ
+      </h1>
+      <p class="hero-desc">
+        レース車両開発・モデルベース開発（MBD）・CAE・走行データ解析に携わるエンジニア向けに、<br class="br-md" />
+        AIツールの最新情報・使い方・実践事例をまとめた技術ブログです。
+      </p>
+      <div class="hero-actions">
+        <a href="/blog" class="btn btn-primary">記事を読む</a>
+        <a href="/tools" class="btn btn-outline">AIツール一覧</a>
+      </div>
+    </div>
+    <div class="hero-stripe" aria-hidden="true"></div>
+  </section>
+
+  <div class="container">
+    <!-- Latest Articles -->
+    <section class="section">
+      <div class="section-header">
+        <h2>最新記事</h2>
+        <a href="/blog" class="section-link">すべて見る →</a>
+      </div>
+      <div class="grid-2">
+        {latestPosts.map((post) => (
+          <ArticleCard
+            slug={post.slug}
+            title={post.data.title}
+            date={post.data.date}
+            category={post.data.category}
+            tags={post.data.tags}
+            tool={post.data.tool}
+            importance={post.data.importance}
+            summary={post.data.summary}
+          />
+        ))}
+      </div>
+    </section>
+
+    <!-- Featured AI Tools -->
+    <section class="section">
+      <div class="section-header">
+        <h2>注目AIツール</h2>
+        <a href="/tools" class="section-link">全ツール一覧 →</a>
+      </div>
+      <div class="grid-2">
+        {highlightTools.map((tool) => (
+          <ToolCard tool={tool} />
+        ))}
+      </div>
+    </section>
+
+    <!-- MBD Featured -->
+    <section class="section mbd-section">
+      <div class="section-header">
+        <h2>MBD エンジニアにおすすめ</h2>
+        <a href="/categories/race-engineering-use-cases" class="section-link">もっと見る →</a>
+      </div>
+      <div class="grid-3">
+        {featuredPosts.map((post) => (
+          <ArticleCard
+            slug={post.slug}
+            title={post.data.title}
+            date={post.data.date}
+            category={post.data.category}
+            tags={post.data.tags}
+            tool={post.data.tool}
+            importance={post.data.importance}
+            summary={post.data.summary}
+          />
+        ))}
+      </div>
+    </section>
+
+    <!-- Categories -->
+    <section class="section">
+      <div class="section-header">
+        <h2>カテゴリ</h2>
+      </div>
+      <div class="category-grid">
+        {CATEGORIES.map((cat) => (
+          <a href={`/categories/${categoryToSlug(cat)}`} class="category-chip">
+            {cat}
+          </a>
+        ))}
+      </div>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  /* Hero */
+  .hero {
+    position: relative;
+    background: var(--color-navy);
+    color: #ffffff;
+    padding: 4rem 0 3.5rem;
+    overflow: hidden;
+  }
+
+  .hero-inner {
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-bottom: 0.75rem;
+    font-family: var(--font-mono);
+  }
+
+  .hero-title {
+    font-size: clamp(1.6rem, 4.5vw, 2.6rem);
+    font-weight: 800;
+    line-height: 1.25;
+    letter-spacing: -0.03em;
+    color: #ffffff;
+    margin-bottom: 1.1rem;
+  }
+
+  .hero-desc {
+    font-size: clamp(0.875rem, 2vw, 1rem);
+    color: #94a3b8;
+    line-height: 1.75;
+    margin-bottom: 1.75rem;
+    max-width: 600px;
+  }
+
+  .br-md {
+    display: none;
+  }
+
+  @media (min-width: 640px) {
+    .br-md { display: inline; }
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .hero .btn-outline {
+    border-color: #334155;
+    color: #94a3b8;
+  }
+
+  .hero .btn-outline:hover {
+    border-color: #94a3b8;
+    color: #ffffff;
+    background: #1e293b;
+  }
+
+  /* Racing stripe decoration */
+  .hero-stripe {
+    position: absolute;
+    right: -2rem;
+    top: 0;
+    bottom: 0;
+    width: 340px;
+    background: repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 18px,
+      rgba(220, 38, 38, 0.06) 18px,
+      rgba(220, 38, 38, 0.06) 36px
+    );
+    pointer-events: none;
+  }
+
+  /* Categories */
+  .category-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+  }
+
+  .category-chip {
+    display: inline-block;
+    padding: 0.5em 1.1em;
+    background: var(--color-bg-muted);
+    border: 1px solid var(--color-border);
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-text);
+    transition: all 0.15s;
+  }
+
+  .category-chip:hover {
+    background: var(--color-navy);
+    color: #ffffff;
+    border-color: var(--color-navy);
+    transform: translateY(-1px);
+  }
+</style>
