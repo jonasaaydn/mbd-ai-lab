@@ -93,7 +93,7 @@ export const tools: Tool[] = [
     category: 'CAE / Simulation AI',
     description:
       'CAEシミュレーション結果をAIで高速予測するツール。物理シミュレーションの代替モデル（サロゲートモデル）をクラウドベースで構築できる。',
-    official_url: 'https://www.ansys.com/products/simulation-ai',
+    official_url: 'https://www.ansys.com/simulation-ai',
     use_cases: ['空力特性の高速予測', 'NVHサロゲートモデル', '設計最適化', '計算時間の大幅短縮'],
     mbd_relevance: 'high',
     tags: ['CAE', 'Surrogate Model', 'CFD', 'FEA'],
