@@ -1,6 +1,8 @@
 ---
 import { categoryToSlug } from '../utils/categories';
 
+const base = import.meta.env.BASE_URL;
+
 interface Props {
   slug: string;
   title: string;
@@ -24,9 +26,9 @@ const importanceLabel = { high: '重要', medium: '注目', low: '参考' }[impo
 ---
 
 <article class="article-card">
-  <a href={`/blog/${slug}`} class="card-link" aria-label={title}>
+  <a href={`${base}blog/${slug}`} class="card-link" aria-label={title}>
     <div class="card-meta">
-      <a href={`/categories/${categoryToSlug(category)}`} class="category-badge" onclick="event.stopPropagation()">
+      <a href={`${base}categories/${categoryToSlug(category)}`} class="category-badge" onclick="event.stopPropagation()">
         {category}
       </a>
       <span class={`badge badge-importance-${importance}`}>

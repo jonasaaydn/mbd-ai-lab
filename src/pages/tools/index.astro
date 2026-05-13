@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import ToolCard from '../../components/ToolCard.astro';
 import { tools } from '../../data/tools';
 
+const base = import.meta.env.BASE_URL;
 const toolCategories = [...new Set(tools.map((t) => t.category))];
 ---
 
@@ -50,7 +51,7 @@ const toolCategories = [...new Set(tools.map((t) => t.category))];
 
     <div class="cta-section">
       <p>各ツールの実践活用事例は記事でも紹介しています。</p>
-      <a href="/blog" class="btn btn-primary">記事を読む</a>
+      <a href={`${base}blog`} class="btn btn-primary">記事を読む</a>
     </div>
   </div>
 </BaseLayout>

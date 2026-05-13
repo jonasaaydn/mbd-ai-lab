@@ -20,6 +20,7 @@ export async function getStaticPaths() {
   });
 }
 
+const base = import.meta.env.BASE_URL;
 const { categoryName, posts } = Astro.props;
 const description = CATEGORY_DESCRIPTIONS[categoryName] ?? '';
 ---
@@ -28,9 +29,9 @@ const description = CATEGORY_DESCRIPTIONS[categoryName] ?? '';
   <div class="container">
     <div class="page-header">
       <div class="breadcrumb">
-        <a href="/">ホーム</a>
+        <a href={base}>ホーム</a>
         <span aria-hidden="true">›</span>
-        <a href="/blog">記事一覧</a>
+        <a href={`${base}blog`}>記事一覧</a>
         <span aria-hidden="true">›</span>
         <span>{categoryName}</span>
       </div>
@@ -59,7 +60,7 @@ const description = CATEGORY_DESCRIPTIONS[categoryName] ?? '';
     ) : (
       <div class="empty-state">
         <p>このカテゴリの記事はまだ準備中です。</p>
-        <a href="/blog" class="btn btn-outline">全記事を見る</a>
+        <a href={`${base}blog`} class="btn btn-outline">全記事を見る</a>
       </div>
     )}
 
@@ -68,7 +69,7 @@ const description = CATEGORY_DESCRIPTIONS[categoryName] ?? '';
       <h2>他のカテゴリ</h2>
       <div class="category-chips">
         {CATEGORIES.filter((c) => c !== categoryName).map((cat) => (
-          <a href={`/categories/${categoryToSlug(cat)}`} class="category-chip">
+          <a href={`${base}categories/${categoryToSlug(cat)}`} class="category-chip">
             {cat}
           </a>
         ))}

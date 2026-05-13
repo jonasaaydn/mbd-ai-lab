@@ -71,7 +71,7 @@ export const tools: Tool[] = [
     category: 'MBD / Simulink',
     description:
       'MATLABに統合されたAIアシスタント。自然言語によるMATLABコード生成・説明・デバッグを支援する。MATLAB R2024b以降に搭載。',
-    official_url: 'https://www.mathworks.com/products/matlab/copilot.html',
+    official_url: 'https://www.mathworks.com/products/matlab.html',
     use_cases: ['MATLABコード生成', 'エラー解説', '関数説明', 'スクリプト最適化'],
     mbd_relevance: 'high',
     tags: ['MATLAB', 'MBD', 'Coding'],
@@ -82,7 +82,7 @@ export const tools: Tool[] = [
     category: 'MBD / Simulink',
     description:
       'Simulinkモデル開発を支援するAIアシスタント。ブロック線図の自動生成・最適化提案・モデル説明生成を自然言語で実行できる。',
-    official_url: 'https://www.mathworks.com/products/simulink/copilot.html',
+    official_url: 'https://www.mathworks.com/products/simulink.html',
     use_cases: ['Simulinkブロック生成', 'モデルデバッグ支援', 'パラメータ最適化提案', 'テストケース生成'],
     mbd_relevance: 'high',
     tags: ['Simulink', 'MBD', 'Model Generation'],

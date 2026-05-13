@@ -1,8 +1,9 @@
 ---
+const base = import.meta.env.BASE_URL;
 const navLinks = [
-  { href: '/blog', label: '記事一覧' },
-  { href: '/tools', label: 'AIツール' },
-  { href: '/categories/race-engineering-use-cases', label: 'Race Engineering' },
+  { href: `${base}blog`, label: '記事一覧' },
+  { href: `${base}tools`, label: 'AIツール' },
+  { href: `${base}categories/race-engineering-use-cases`, label: 'Race Engineering' },
 ];
 
 const currentPath = Astro.url.pathname;
@@ -10,7 +11,7 @@ const currentPath = Astro.url.pathname;
 
 <header class="site-header">
   <div class="container header-inner">
-    <a href="/" class="site-logo">
+    <a href={base} class="site-logo">
       <span class="logo-icon" aria-hidden="true">⚙</span>
       <span class="logo-text">
         <span class="logo-main">MBD×AI Lab</span>

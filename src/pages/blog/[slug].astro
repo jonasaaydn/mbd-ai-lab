@@ -3,6 +3,8 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { categoryToSlug } from '../../utils/categories';
 
+const base = import.meta.env.BASE_URL;
+
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
   return posts.map((post) => ({
@@ -30,7 +32,7 @@ const importanceLabel = { high: '重要', medium: '注目', low: '参考' }[impo
     <div class="article-header-wrap">
       <div class="container article-header">
         <div class="article-meta-top">
-          <a href={`/categories/${categoryToSlug(category)}`} class="category-badge">
+          <a href={`${base}categories/${categoryToSlug(category)}`} class="category-badge">
             {category}
           </a>
           <span class={`badge badge-importance-${importance}`}>
@@ -87,7 +89,7 @@ const importanceLabel = { high: '重要', medium: '注目', low: '参考' }[impo
           <dl class="sidebar-dl">
             <dt>カテゴリ</dt>
             <dd>
-              <a href={`/categories/${categoryToSlug(category)}`} class="category-badge">
+              <a href={`${base}categories/${categoryToSlug(category)}`} class="category-badge">
                 {category}
               </a>
             </dd>
@@ -120,7 +122,7 @@ const importanceLabel = { high: '重要', medium: '注目', low: '参考' }[impo
           </dl>
         </div>
 
-        <a href="/blog" class="btn btn-outline back-btn">← 記事一覧に戻る</a>
+        <a href={`${base}blog`} class="btn btn-outline back-btn">← 記事一覧に戻る</a>
       </aside>
     </div>
   </article>

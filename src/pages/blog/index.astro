@@ -4,6 +4,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import ArticleCard from '../../components/ArticleCard.astro';
 import { CATEGORIES, categoryToSlug } from '../../utils/categories';
 
+const base = import.meta.env.BASE_URL;
 const allPosts = await getCollection('blog');
 const posts = allPosts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
@@ -27,14 +28,14 @@ const filteredPosts = selectedCategory
     <!-- Category Filter -->
     <div class="filter-bar">
       <a
-        href="/blog"
+        href={`${base}blog`}
         class:list={['filter-chip', { active: !selectedCategory }]}
       >
         すべて
       </a>
       {CATEGORIES.map((cat) => (
         <a
-          href={`/blog?category=${categoryToSlug(cat)}`}
+          href={`${base}blog?category=${categoryToSlug(cat)}`}
           class:list={['filter-chip', { active: selectedCategory === categoryToSlug(cat) }]}
         >
           {cat}
@@ -60,7 +61,7 @@ const filteredPosts = selectedCategory
     ) : (
       <div class="empty-state">
         <p>このカテゴリの記事はまだありません。</p>
-        <a href="/blog" class="btn btn-outline">全記事を見る</a>
+        <a href={`${base}blog`} class="btn btn-outline">全記事を見る</a>
       </div>
     )}
   </div>
