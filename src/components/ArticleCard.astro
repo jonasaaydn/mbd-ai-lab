@@ -1,5 +1,5 @@
 ---
-import { categoryToSlug } from '../utils/categories';
+import { categoryToSlug, CATEGORY_COLORS } from '../utils/categories';
 
 const base = import.meta.env.BASE_URL;
 
@@ -16,6 +16,8 @@ interface Props {
 
 const { slug, title, date, category, tags, tool, importance, summary } = Astro.props;
 
+const colors = CATEGORY_COLORS[category] ?? { from: '#0f172a', to: '#1e293b', label: category };
+
 const formattedDate = date.toLocaleDateString('ja-JP', {
   year: 'numeric',
   month: '2-digit',
@@ -27,6 +29,17 @@ const importanceLabel = { high: '重要', medium: '注目', low: '参考' }[impo
 
 <article class="article-card">
   <a href={`${base}blog/${slug}`} class="card-link" aria-label={title}>
+
+    <!-- Thumbnail -->
+    <div
+      class="card-thumb"
+      style={`background: linear-gradient(135deg, ${colors.from} 0%, ${colors.to} 100%)`}
+    >
+      <div class="thumb-stripe" aria-hidden="true"></div>
+      <span class="thumb-label">{colors.label}</span>
+      {tool && <span class="thumb-tool">{tool}</span>}
+    </div>
+
     <div class="card-meta">
       <a href={`${base}categories/${categoryToSlug(category)}`} class="category-badge" onclick="event.stopPropagation()">
         {category}
@@ -53,6 +66,56 @@ const importanceLabel = { high: '重要', medium: '注目', low: '参考' }[impo
 </article>
 
 <style>
+  /* Thumbnail */
+  .card-thumb {
+    position: relative;
+    height: 90px;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+
+  .thumb-stripe {
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 14px,
+      rgba(255, 255, 255, 0.04) 14px,
+      rgba(255, 255, 255, 0.04) 28px
+    );
+  }
+
+  .thumb-label {
+    position: absolute;
+    bottom: 10px;
+    left: 14px;
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    color: rgba(255, 255, 255, 0.45);
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+  }
+
+  .thumb-tool {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    padding: 0.2em 0.6em;
+    font-family: var(--font-mono);
+    max-width: 140px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
   .article-card {
     background: var(--color-bg);
     border: 1px solid var(--color-border);
