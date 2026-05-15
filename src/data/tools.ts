@@ -109,4 +109,15 @@ export const tools: Tool[] = [
     mbd_relevance: 'high',
     tags: ['PINN', 'Physics AI', 'CFD', 'Open Source', 'GPU'],
   },
+  {
+    name: 'Neural Concept',
+    developer: 'Neural Concept',
+    category: 'CAE / Simulation AI',
+    description:
+      'エンジニアリング設計向けAIサロゲートモデルプラットフォーム。測地線CNNとGNNで過去のCFDデータを学習し、新形状の空力特性を0.1秒以下で予測する。Racing Bulls（VCARB）F1チームが2026年規制対応の空力開発に本格採用。',
+    official_url: 'https://www.neuralconcept.com',
+    use_cases: ['空力サロゲートモデル構築', '設計バリアント高速スクリーニング', 'CFD前工程の自動化', 'デジタルツイン構築'],
+    mbd_relevance: 'high',
+    tags: ['Surrogate Model', 'GNN', 'CFD', 'Aerodynamics', 'F1', 'SaaS'],
+  },
 ];
