@@ -4,3 +4,4 @@ dist/
 .env
 .env.*
 !.env.example
+ROUTINE_PROMPT.md
