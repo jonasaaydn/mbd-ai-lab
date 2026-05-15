@@ -92,10 +92,21 @@ export const tools: Tool[] = [
     developer: 'Ansys',
     category: 'CAE / Simulation AI',
     description:
-      'CAEシミュレーション結果をAIで高速予測するツール。物理シミュレーションの代替モデル（サロゲートモデル）をクラウドベースで構築できる。',
-    official_url: 'https://www.ansys.com/simulation-ai',
+      'CAEシミュレーション結果をAIで高速予測するツール。物理シミュレーションの代替モデル（サロゲートモデル）をクラウドベースで構築できる。2026 R1からSimAI ProとSimAI Premiumの2層構成に刷新された。',
+    official_url: 'https://www.ansys.com/products/ai/simai',
     use_cases: ['空力特性の高速予測', 'NVHサロゲートモデル', '設計最適化', '計算時間の大幅短縮'],
     mbd_relevance: 'high',
     tags: ['CAE', 'Surrogate Model', 'CFD', 'FEA'],
+  },
+  {
+    name: 'NVIDIA PhysicsNeMo',
+    developer: 'NVIDIA',
+    category: 'CAE / Simulation AI',
+    description:
+      'NVIDIAのオープンソース物理AI深層学習フレームワーク。PINN・ニューラルオペレータ・GNNをGPUスケールで実行でき、CFD/FEMのサロゲートモデル構築を加速する。',
+    official_url: 'https://github.com/NVIDIA/physicsnemo',
+    use_cases: ['PINNによるCFD高速化', '熱流体サロゲートモデル', '乱流モデリング', '設計最適化ループ加速'],
+    mbd_relevance: 'high',
+    tags: ['PINN', 'Physics AI', 'CFD', 'Open Source', 'GPU'],
   },
 ];
