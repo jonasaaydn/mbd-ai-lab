@@ -10,5 +10,8 @@
   },
   "dependencies": {
     "astro": "^4.16.0"
+  },
+  "devDependencies": {
+    "@anthropic-ai/sdk": "^0.96.0"
   }
 }
