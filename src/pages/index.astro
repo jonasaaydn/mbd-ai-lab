@@ -5,6 +5,7 @@ import ArticleCard from '../components/ArticleCard.astro';
 import ToolCard from '../components/ToolCard.astro';
 import { tools } from '../data/tools';
 import { CATEGORIES, categoryToSlug } from '../utils/categories';
+import { getReadingTime } from '../utils/reading-time';
 
 const base = import.meta.env.BASE_URL;
 const allPosts = await getCollection('blog');
@@ -59,6 +60,7 @@ const highlightTools = tools.filter((t) => t.mbd_relevance === 'high').slice(0, 
             tool={post.data.tool}
             importance={post.data.importance}
             summary={post.data.summary}
+            readingTime={getReadingTime(post.body)}
           />
         ))}
       </div>
@@ -94,6 +96,7 @@ const highlightTools = tools.filter((t) => t.mbd_relevance === 'high').slice(0, 
             tool={post.data.tool}
             importance={post.data.importance}
             summary={post.data.summary}
+            readingTime={getReadingTime(post.body)}
           />
         ))}
       </div>

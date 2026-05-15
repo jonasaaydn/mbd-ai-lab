@@ -1,7 +1,9 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
 import { categoryToSlug } from '../../utils/categories';
+import { getReadingTime } from '../../utils/reading-time';
 
 const base = import.meta.env.BASE_URL;
 
@@ -25,9 +27,22 @@ const formattedDate = date.toLocaleDateString('ja-JP', {
 });
 
 const importanceLabel = { high: '重要', medium: '注目', low: '参考' }[importance];
+const readingTime = getReadingTime(post.body);
+
+// 関連記事: 同カテゴリから最新3件（自分自身を除く）
+const allPosts = await getCollection('blog');
+const related = allPosts
+  .filter((p) => p.slug !== post.slug && p.data.category === category)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 3);
 ---
 
-<BaseLayout title={title} description={summary}>
+<BaseLayout
+  title={title}
+  description={summary}
+  ogType="article"
+  canonicalPath={`/blog/${post.slug}/`}
+>
   <article class="article-page">
     <div class="article-header-wrap">
       <div class="container article-header">
@@ -39,6 +54,7 @@ const importanceLabel = { high: '重要', medium: '注目', low: '参考' }[impo
             <span class={`importance-dot importance-dot-${importance}`}></span>
             {importanceLabel}
           </span>
+          <span class="reading-time-badge">{readingTime} min read</span>
         </div>
 
         <h1 class="article-title">{title}</h1>
@@ -99,6 +115,8 @@ const importanceLabel = { high: '重要', medium: '注目', low: '参考' }[impo
                 {importanceLabel}
               </span>
             </dd>
+            <dt>読了時間</dt>
+            <dd class="info-value">{readingTime} 分</dd>
             <dt>タグ</dt>
             <dd class="tags-dd">
               {tags.map((tag) => <span class="tag">{tag}</span>)}
@@ -125,6 +143,33 @@ const importanceLabel = { high: '重要', medium: '注目', low: '参考' }[impo
         <a href={`${base}blog`} class="btn btn-outline back-btn">← 記事一覧に戻る</a>
       </aside>
     </div>
+
+    <!-- 関連記事 -->
+    {related.length > 0 && (
+      <div class="container related-section">
+        <div class="section-header">
+          <h2>同じカテゴリの記事</h2>
+          <a href={`${base}categories/${categoryToSlug(category)}`} class="section-link">
+            {category} をすべて見る →
+          </a>
+        </div>
+        <div class="grid-3">
+          {related.map((p) => (
+            <ArticleCard
+              slug={p.slug}
+              title={p.data.title}
+              date={p.data.date}
+              category={p.data.category}
+              tags={p.data.tags}
+              tool={p.data.tool}
+              importance={p.data.importance}
+              summary={p.data.summary}
+              readingTime={getReadingTime(p.body)}
+            />
+          ))}
+        </div>
+      </div>
+    )}
   </article>
 </BaseLayout>
 
@@ -151,6 +196,14 @@ const importanceLabel = { high: '重要', medium: '注目', low: '参考' }[impo
     background: rgba(255, 255, 255, 0.15);
     color: #e2e8f0;
     border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .reading-time-badge {
+    font-size: 0.68rem;
+    font-weight: 600;
+    font-family: var(--font-mono);
+    color: rgba(255, 255, 255, 0.45);
+    letter-spacing: 0.04em;
   }
 
   .article-title {
@@ -305,6 +358,22 @@ const importanceLabel = { high: '重要', medium: '注目', low: '参考' }[impo
     text-decoration-color: currentColor;
   }
 
+  /* Shiki コードブロック */
+  .prose :global(pre) {
+    border-radius: var(--radius-md);
+    margin-bottom: 1.5rem;
+    overflow-x: auto;
+    font-size: 0.875rem;
+    line-height: 1.6;
+  }
+
+  .prose :global(pre code) {
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: inherit;
+  }
+
   /* Sidebar */
   .article-sidebar {
     position: sticky;
@@ -369,10 +438,23 @@ const importanceLabel = { high: '重要', medium: '注目', low: '参考' }[impo
     font-size: 0.85rem;
   }
 
+  .sidebar-dl .info-value {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+  }
+
   .back-btn {
     width: 100%;
     justify-content: center;
     font-size: 0.85rem;
+  }
+
+  /* 関連記事 */
+  .related-section {
+    padding-bottom: 4rem;
+    border-top: 1px solid var(--color-border);
+    padding-top: 3rem;
   }
 
   @media (max-width: 900px) {

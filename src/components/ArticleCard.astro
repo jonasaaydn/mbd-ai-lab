@@ -12,9 +12,10 @@ interface Props {
   tool?: string;
   importance: 'high' | 'medium' | 'low';
   summary: string;
+  readingTime?: number;
 }
 
-const { slug, title, date, category, tags, tool, importance, summary } = Astro.props;
+const { slug, title, date, category, tags, tool, importance, summary, readingTime } = Astro.props;
 
 const colors = CATEGORY_COLORS[category] ?? { from: '#0f172a', to: '#1e293b', label: category };
 
@@ -137,7 +138,10 @@ const iconSvg = ICONS[category] ?? ICONS['Tool Comparison'];
         ))}
         {tool && <span class="tag tag-tool">{tool}</span>}
       </div>
-      <time class="card-date" datetime={date.toISOString()}>{formattedDate}</time>
+      <div class="card-date-wrap">
+        {readingTime && <span class="card-reading-time">{readingTime} min</span>}
+        <time class="card-date" datetime={date.toISOString()}>{formattedDate}</time>
+      </div>
     </div>
   </a>
 </article>
@@ -320,6 +324,20 @@ const iconSvg = ICONS[category] ?? ICONS['Tool Comparison'];
     color: #15803d;
     border-color: #bbf7d0;
     font-weight: 600;
+  }
+
+  .card-date-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.15rem;
+    flex-shrink: 0;
+  }
+
+  .card-reading-time {
+    font-size: 0.7rem;
+    color: var(--color-text-subtle);
+    font-family: var(--font-mono);
   }
 
   .card-date {
