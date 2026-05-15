@@ -96,6 +96,50 @@ summary: "概要1〜2文"
 
 ---
 
+## 自動記事ルーティンの修正手順（失敗時）
+
+### 失敗の原因
+Claude ルーティンはクラウドで実行されるため、ローカルの git credentials を持たない。
+`git push` に失敗してもエラーが無視される構造になっていた。
+
+### 修正方法（無料・一度だけ設定）
+
+**Step 1: GitHub Fine-grained PAT を作成**
+1. https://github.com/settings/tokens?type=beta を開く
+2. "Generate new token" をクリック
+3. 以下の設定で作成:
+   - Token name: `mbd-ai-lab-routine`
+   - Repository access: Only selected repositories → `mbd-ai-lab`
+   - Permissions: **Contents → Read and write**
+4. 生成されたトークンを安全な場所にコピー（再表示不可）
+
+**Step 2: ルーティンを更新**
+
+https://claude.ai/code/routines/trig_01FhUeHuEiurx2ecmNni7ef6 を開き、
+ルーティンの指示に以下を追加する（`YOUR_PAT` を実際のトークンに置き換え）:
+
+```
+記事ファイルを作成したら、git push ではなく GitHub API で直接アップロードする：
+
+1. 記事の Markdown 内容を base64 エンコード
+2. 以下の curl コマンドを実行:
+
+curl -X PUT \
+  "https://api.github.com/repos/jonasaaydn/mbd-ai-lab/contents/src/content/blog/FILENAME.md" \
+  -H "Authorization: token YOUR_PAT" \
+  -H "Content-Type: application/json" \
+  -d "{\"message\": \"feat: 自動記事追加 $(date +%Y-%m-%d)\", \"content\": \"$(base64 -w 0 FILENAME.md)\"}"
+
+これにより git push 不要で GitHub に直接ファイルが作成される。
+deploy.yml が自動的にサイトをデプロイする。
+```
+
+**Step 3: ルーティンを手動実行して動作確認**
+- claude.ai/code/routines で "Run now" をクリック
+- https://github.com/jonasaaydn/mbd-ai-lab/actions でデプロイが走ることを確認
+
+---
+
 ## よく使うコマンド
 
 ```powershell
