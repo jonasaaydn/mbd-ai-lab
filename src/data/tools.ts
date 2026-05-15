@@ -109,4 +109,15 @@ export const tools: Tool[] = [
     mbd_relevance: 'high',
     tags: ['PINN', 'Physics AI', 'CFD', 'Open Source', 'GPU'],
   },
+  {
+    name: 'Foam-Agent',
+    developer: 'RPI CSML Lab',
+    category: 'CAE / Simulation AI',
+    description:
+      'OpenFOAMベースのCFDシミュレーションを自然言語プロンプトから全自動化するマルチエージェントフレームワーク。NeurIPS 2025採択。Claude 3.5 Sonnetで成功率88.2%を達成し、メッシュ生成からParaView可視化まで全工程を自動実行する。',
+    official_url: 'https://github.com/csml-rpi/Foam-Agent',
+    use_cases: ['OpenFOAM自動セットアップ', '空力形状パラメータスタディ', 'CFDケース量産', '乱流解析自動化'],
+    mbd_relevance: 'high',
+    tags: ['CFD', 'OpenFOAM', 'Multi-Agent', 'Automation', 'Open Source'],
+  },
 ];
