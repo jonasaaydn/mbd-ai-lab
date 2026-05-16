@@ -70,22 +70,22 @@ export const tools: Tool[] = [
     developer: 'MathWorks',
     category: 'MBD / Simulink',
     description:
-      'MATLABに統合されたAIアシスタント。自然言語によるMATLABコード生成・説明・デバッグを支援する。MATLAB R2024b以降に搭載。',
+      'MATLABに統合されたAIアシスタント。自然言語によるMATLABコード生成・説明・デバッグを支援する。MATLAB R2024b以降に搭載。2026年にはMATLAB MCP Core Server・MATLAB Agentic Toolkitが公式リリースされ、Claude CodeなどのAIエージェントがMATLABを直接実行・制御できるようになった。',
     official_url: 'https://www.mathworks.com/products/matlab.html',
-    use_cases: ['MATLABコード生成', 'エラー解説', '関数説明', 'スクリプト最適化'],
+    use_cases: ['MATLABコード生成', 'エラー解説', '関数説明', 'スクリプト最適化', 'AIエージェントによる自律実行'],
     mbd_relevance: 'high',
-    tags: ['MATLAB', 'MBD', 'Coding'],
+    tags: ['MATLAB', 'MBD', 'Coding', 'MCP', 'Agentic AI'],
   },
   {
     name: 'Simulink Copilot',
     developer: 'MathWorks',
     category: 'MBD / Simulink',
     description:
-      'Simulinkモデル開発を支援するAIアシスタント。ブロック線図の自動生成・最適化提案・モデル説明生成を自然言語で実行できる。',
+      'Simulinkモデル開発を支援するAIアシスタント。2026年4月には公式Simulink Agentic ToolkitがリリースされMCPを通じてClaude CodeなどのAIエージェントがSimulinkモデルをブロック単位で自律構築・編集・テストできるようになった。6つのMCPツールと7つのMBDスキルを搭載。',
     official_url: 'https://www.mathworks.com/products/simulink.html',
-    use_cases: ['Simulinkブロック生成', 'モデルデバッグ支援', 'パラメータ最適化提案', 'テストケース生成'],
+    use_cases: ['Simulinkブロック生成', 'モデルデバッグ支援', 'パラメータ最適化提案', 'テストケース生成', 'AIエージェントによる自律モデル構築'],
     mbd_relevance: 'high',
-    tags: ['Simulink', 'MBD', 'Model Generation'],
+    tags: ['Simulink', 'MBD', 'Model Generation', 'MCP', 'Agentic AI'],
   },
   {
     name: 'Ansys SimAI',
@@ -108,6 +108,17 @@ export const tools: Tool[] = [
     use_cases: ['PINNによるCFD高速化', '熱流体サロゲートモデル', '乱流モデリング', '設計最適化ループ加速'],
     mbd_relevance: 'high',
     tags: ['PINN', 'Physics AI', 'CFD', 'Open Source', 'GPU'],
+  },
+  {
+    name: 'Neural Concept',
+    developer: 'Neural Concept SA',
+    category: 'CAE / Simulation AI',
+    description:
+      'スイス発のエンジニアリングAIプラットフォーム。CFD/FEAシミュレーション結果をもとにディープラーニング（グラフニューラルネットワーク）で形状最適化・設計変数探索を高速化する。Visa Cash App Racing Bulls F1チームが車体空力開発に採用。2025年末に1億ドルを調達しNVIDIA Omniverse連携も実現。',
+    official_url: 'https://www.neuralconcept.com',
+    use_cases: ['空力形状のAI高速予測', '設計パラメータスタディ自動化', 'CFDサロゲートモデル構築', 'EV車体の空力最適化'],
+    mbd_relevance: 'high',
+    tags: ['Aerodynamics', 'Surrogate Model', 'GNN', 'CAE', 'F1', 'Design Optimization'],
   },
   {
     name: 'Foam-Agent',
