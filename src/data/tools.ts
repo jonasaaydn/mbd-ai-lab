@@ -131,4 +131,15 @@ export const tools: Tool[] = [
     mbd_relevance: 'high',
     tags: ['CFD', 'OpenFOAM', 'Multi-Agent', 'Automation', 'Open Source'],
   },
+  {
+    name: 'PhysicsX',
+    developer: 'PhysicsX Ltd.',
+    category: 'CAE / Simulation AI',
+    description:
+      '英国発の物理AIスタートアップ。2万件超の車両CFDデータセット（PXNetCar）を用いた「Large Physics Model（LPM）」の構築に取り組む。LLMが汎用言語理解を獲得したように、物理シミュレーションの汎用理解モデルを目指す。Siemensとの協業でブレーキ冷却最適化に既に実用展開済み。',
+    official_url: 'https://www.physicsx.ai',
+    use_cases: ['自動車空力サロゲートモデル', 'ブレーキ冷却最適化', '形状設計スタディ高速化', 'CFD代替予測'],
+    mbd_relevance: 'high',
+    tags: ['Large Physics Model', 'CFD', 'Surrogate Model', 'Automotive', 'Aerodynamics', 'Siemens'],
+  },
 ];
