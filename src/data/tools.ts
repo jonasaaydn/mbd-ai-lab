@@ -154,6 +154,17 @@ export const tools: Tool[] = [
     tags: ['Generative AI', 'CAD', 'Design Optimization', 'CAE', 'optiSLang'],
   },
   {
+    name: 'Altair PhysicsAI',
+    developer: 'Altair Engineering (Siemens)',
+    category: 'CAE / Simulation AI',
+    description:
+      'HyperWorks 2026（2025年12月リリース）に統合されたジオメトリ深層学習ベースのCAEサロゲートモデルツール。メッシュ形式・設計変数定義を問わず既存CAEデータ（構造・熱・流体・電磁場）から学習し、新形状を従来ソルバー比10〜1000倍速で予測する。ソルバー非依存でOptiStruct・AcuSolve・Fluent等のCAE履歴をそのまま活用でき、ブラウザ環境でデプロイ可能。Siemensによる買収後も製品として継続開発中。',
+    official_url: 'https://altair.com/physicsai',
+    use_cases: ['構造解析サロゲートモデル', '空力CFD高速スクリーニング', '熱流体予測', '既存CAE履歴のAI活用', 'トラックサイドでのリアルタイム予測'],
+    mbd_relevance: 'high',
+    tags: ['Surrogate Model', 'Geometric Deep Learning', 'CAE', 'CFD', 'FEA', 'Solver Agnostic'],
+  },
+  {
     name: 'PhysicsX',
     developer: 'PhysicsX Ltd.',
     category: 'CAE / Simulation AI',
