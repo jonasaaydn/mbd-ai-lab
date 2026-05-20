@@ -148,7 +148,7 @@ export const tools: Tool[] = [
     category: 'CAE / Simulation AI',
     description:
       'Ansys 2026 R1（2026年3月）でリリースされた生成AIジオメトリツール。参照CAD・シミュレーションデータセットから学習し、設計制約を満たしながら新たなジオメトリコンセプトを生成する。optiSLangと統合することで潜在空間上での設計最適化ループを実現。従来の形状パラメトリック変更を超え、「デザインランゲージ」を保持した新形状を自動提案する。',
-    official_url: 'https://www.ansys.com/blog/introducing-ansys-geomai-software',
+    official_url: 'https://www.ansys.com/products/ai/geomai',
     use_cases: ['コンセプト設計ジオメトリ生成', '設計制約を満たす新形状提案', 'optiSLang連携最適化', '設計初期探索の高速化'],
     mbd_relevance: 'high',
     tags: ['Generative AI', 'CAD', 'Design Optimization', 'CAE', 'optiSLang'],
