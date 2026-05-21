@@ -71,7 +71,7 @@ export const tools: Tool[] = [
     category: 'MBD / Simulink',
     description:
       'MATLABに統合されたAIアシスタント。自然言語によるMATLABコード生成・説明・デバッグを支援する。R2025aで正式搭載、R2026aではテスト自動生成（MATLAB Test連携）とPolyspace Copilotによる組込みソフトウェアコード解析にも対応。2026年4月にはMATLAB Agentic Toolkitが公式リリースされ、Claude Code・GitHub Copilot・Gemini CLIなどのAIエージェントがMCPを介してMATLABを直接実行・制御できるようになった。',
-    official_url: 'https://www.mathworks.com/products/matlab-agentic-toolkit.html',
+    official_url: 'https://github.com/matlab/matlab-agentic-toolkit',
     use_cases: ['MATLABコード生成', 'エラー解説', '関数説明', 'テスト自動生成', 'Polyspace静的解析支援', 'AIエージェントによる自律実行'],
     mbd_relevance: 'high',
     tags: ['MATLAB', 'MBD', 'Coding', 'MCP', 'Agentic AI'],
@@ -82,7 +82,7 @@ export const tools: Tool[] = [
     category: 'MBD / Simulink',
     description:
       'R2026aで正式製品化されたSimulinkのAIアシスタント。モデルの説明・エラー解析・設計ガイダンス・規格準拠チェックを自動化。2026年4月にはSimulink Agentic Toolkitが公式リリースされMCPを通じてClaude CodeなどのAIエージェントがSimulinkモデルをブロック単位で自律構築・編集・テストできるようになった。6つのMCPツールと7つのMBDスキルを搭載。',
-    official_url: 'https://www.mathworks.com/products/simulink-agentic-toolkit.html',
+    official_url: 'https://github.com/matlab/simulink-agentic-toolkit',
     use_cases: ['Simulinkブロック生成', 'モデルデバッグ支援', '規格準拠自動チェック', 'テストケース生成', 'AIエージェントによる自律モデル構築'],
     mbd_relevance: 'high',
     tags: ['Simulink', 'MBD', 'Model Generation', 'MCP', 'Agentic AI'],
