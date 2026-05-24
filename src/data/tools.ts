@@ -164,4 +164,37 @@ export const tools: Tool[] = [
     mbd_relevance: 'high',
     tags: ['Large Physics Model', 'CFD', 'Surrogate Model', 'Automotive', 'Aerodynamics', 'NVIDIA', 'LGM'],
   },
+  {
+    name: 'nTop',
+    developer: 'nTop Inc.',
+    category: 'CAE / Simulation AI',
+    description:
+      '米国発のジェネラティブデザインプラットフォーム。GPU加速の暗黙的ジオメトリモデリング（Implicit Modeling）で、数百のパラメトリック形状バリアントを数秒で生成。2025年3月にLuminary CloudおよびNVIDIA PhysicsNeMoと統合し、「ジオメトリ生成→GPU並列CFD/FEA→物理AIサロゲート訓練」を1日で完結する「物理AI統合設計パイプライン」を実現。従来数週間〜数ヶ月かかっていた設計最適化が数時間に短縮される。NASA・SpaceX・GE Aerospaceを含む450社超が採用。',
+    official_url: 'https://www.ntop.com',
+    use_cases: ['トポロジー最適化', 'ラティス/ジャイロイド構造生成', '軽量化設計', 'AI物理サロゲート連携', '空力形状最適化'],
+    mbd_relevance: 'high',
+    tags: ['Topology Optimization', 'Generative Design', 'CAD', 'Lightweighting', 'Physics AI', 'GPU'],
+  },
+  {
+    name: 'Amazon Q Developer',
+    developer: 'Amazon Web Services',
+    category: 'AI Coding',
+    description:
+      'AWSのAIコーディングアシスタント。2025年5月にAUTOSAR/SDV（ソフトウェア定義車両）向けの公式ブログを公開し、自動車組込みソフトウェア開発への適用例を実証。インラインコードコメントからAUTOSAR SWC（ソフトウェアコンポーネント）のC/C++コードおよびARXML設定ファイルを自動生成。VS Code・JetBrainsに統合されワークスペースのコンテキストを理解した上でAUTOSAR準拠コードを生成・リファクタリング・デバッグする。SWE-Bench Verifiedで66%を達成（2025年4月）。',
+    official_url: 'https://aws.amazon.com/q/developer/',
+    use_cases: ['AUTOSAR SWCコード生成', 'ARXML設定ファイル自動生成', '組込みC/C++リファクタリング', 'SDV開発支援', 'コードレビュー自動化'],
+    mbd_relevance: 'medium',
+    tags: ['AUTOSAR', 'SDV', 'Coding', 'IDE', 'AWS', 'Embedded C'],
+  },
+  {
+    name: 'Monolith AI',
+    developer: 'Monolith AI (CoreWeave傘下)',
+    category: 'CAE / Simulation AI',
+    description:
+      'インペリアル・カレッジ・ロンドン発のノーコードMLプラットフォーム。2025年10月にGPUクラウド大手CoreWeaveが買収。テスト/シミュレーションデータをアップロードするだけでCNN/GNNベースのサロゲートモデルを自動構築する。BMW・Nissan・Honeywell・WECハイパーカーチームが採用。クラッシュ性能予測・空力解析・NVH・バッテリー熱解析などに対応し、物理試験の大幅削減（80%超の事例あり）を実現。2026年ロードマップではモデル品質の自動監視・信頼区間・サインオフ可能なトレーサビリティ機能を追加予定。',
+    official_url: 'https://www.monolithai.com',
+    use_cases: ['クラッシュ性能サロゲートモデル', '空力特性予測', 'NVH解析', '試験計画最適化', 'バッテリー熱挙動予測'],
+    mbd_relevance: 'high',
+    tags: ['No-Code ML', 'Surrogate Model', 'Crash', 'NVH', 'Aerodynamics', 'CoreWeave', 'Test Reduction'],
+  },
 ];
