@@ -197,4 +197,26 @@ export const tools: Tool[] = [
     mbd_relevance: 'high',
     tags: ['No-Code ML', 'Surrogate Model', 'Crash', 'NVH', 'Aerodynamics', 'CoreWeave', 'Test Reduction'],
   },
+  {
+    name: 'Simcenter STAR-CCM+',
+    developer: 'Siemens Digital Industries Software',
+    category: 'CAE / Simulation AI',
+    description:
+      'SiemensのCFD/熱流体シミュレーションソルバー。2026年2月リリースの2602で「Simcenter Physics AI」を搭載。既存DoEケースから幾何深層学習（GDL）モデルを自動訓練し、新形状の圧力・速度場をCFDなしで秒単位に予測する。従来のスカラー予測にとどまらないフィールドレベルのAI予測（壁面静圧・摩擦係数分布）により、設計変更のターンアラウンドが数時間から数十秒に短縮。GPU加速ソルバー強化とoptiSLang連携で設計最適化ループも自動化できる。F1・NASCAR・LMDhなどトップカテゴリの空力開発で広く採用。',
+    official_url: 'https://plm.sw.siemens.com/en-US/simcenter/fluids-thermal-simulation/star-ccm/',
+    use_cases: ['GDLによる空力場フィールド予測', 'Design Managerでの設計空間探索', 'optiSLang連携多目的最適化', 'CFDサロゲートモデル自動構築', '熱流体解析とNVH予測'],
+    mbd_relevance: 'high',
+    tags: ['CFD', 'Geometric Deep Learning', 'Surrogate Model', 'Aerodynamics', 'Physics AI', 'Siemens', 'GPU'],
+  },
+  {
+    name: 'ETAS ASCMO',
+    developer: 'ETAS GmbH (Robert Bosch GmbH)',
+    category: 'MBD / Simulink',
+    description:
+      'ETASのデータ駆動型システムモデリング＆モデルベースキャリブレーションツール。ガウス過程（GP）やニューラルネットワーク（RNN/CNN）でエンジン・EV・トランスミッションの特性をデータから自動学習し、ECUマップを最適化する。ASCMO-STATICは定常エンジンマップ（燃費・トルク・排気）、ASCMO-DYNAMICは過渡・動的挙動をGP+RNNでモデル化。ASCMO-MOCAは制約付き多目的キャリブレーション最適化、ASCMO-ODCMは走行中にMLが自律的に計測範囲を探索する。2026年1月にMicrosoft Azure Marketplaceでのクラウド提供を開始し、チーム全体でのMBDキャリブレーション作業をクラウドに移行できるようになった。',
+    official_url: 'https://www.etas.com/ww/en/products-services/data-acquisition-processing-tools/software-products/ascmo/',
+    use_cases: ['エンジンECUマップ自動最適化', 'EV/HEVパワートレインキャリブレーション', '過渡特性のGP/RNNモデリング', 'オンラインDoEによる自律計測探索', 'クラウドベースのMBDキャリブレーション'],
+    mbd_relevance: 'high',
+    tags: ['Calibration', 'Gaussian Process', 'RNN', 'ECU', 'Engine', 'MBD', 'Azure', 'ETAS', 'INCA'],
+  },
 ];
