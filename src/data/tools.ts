@@ -187,6 +187,28 @@ export const tools: Tool[] = [
     tags: ['AUTOSAR', 'SDV', 'Coding', 'IDE', 'AWS', 'Embedded C'],
   },
   {
+    name: 'Collimator AI',
+    developer: 'Collimator Inc.',
+    category: 'AI Coding',
+    description:
+      'クラウドネイティブなモデルベース制御設計プラットフォーム。PythonでSimulinkライクなブロック線図を定義し、MPC・LQR・PIコントローラ設計とシミュレーションをブラウザ上で完結させる。PyTorch/ONNXモデルを制御ブロックとして直接挿入できるため、強化学習ポリシーのSIL検証まで同一フレームワーク内で完結。フリープランあり、プロプランは月$49。',
+    official_url: 'https://www.collimator.ai',
+    use_cases: ['アクティブサスペンションMPC設計', 'パワートレイン制御則の検証', 'RL制御ポリシーのSIL検証', 'クラウド並列パラメータスタディ', 'FMU連携シミュレーション'],
+    mbd_relevance: 'medium',
+    tags: ['MPC', 'Control Design', 'Python', 'Cloud MBD', 'Neural Network Control', 'FMU'],
+  },
+  {
+    name: 'Simcenter STAR-CCM+',
+    developer: 'Siemens Digital Industries Software',
+    category: 'CAE / Simulation AI',
+    description:
+      'SiemensのフラッグシップCFD/マルチフィジクスソルバー。2026年2月リリースの2602バージョンでDesign Manager統合の幾何深層学習（GDL）サロゲートを搭載。わずか20〜40ケースのCFDデータからメッシュ節点単位の圧力場・剪断応力場フルフィールド予測モデルを自動構築し、新形状を5秒以内に評価できる。レガシーシミュレーションデータの再利用・GPU並列学習・Python Client APIにも対応。',
+    official_url: 'https://plm.sw.siemens.com/en-US/simcenter/fluids-thermal-simulation/star-ccm/',
+    use_cases: ['空力フルフィールドサロゲートモデル', '設計探索1000点をDOE40ケースで実現', 'NVH・熱流体マルチフィジクス解析', '過去CFDデータの転移学習活用', 'optiSLang連携ベイズ最適化'],
+    mbd_relevance: 'high',
+    tags: ['CFD', 'GDL', 'Surrogate Model', 'Aerodynamics', 'Siemens', 'Design Manager', 'Multi-fidelity'],
+  },
+  {
     name: 'Monolith AI',
     developer: 'Monolith AI (CoreWeave傘下)',
     category: 'CAE / Simulation AI',
