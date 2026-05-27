@@ -219,4 +219,26 @@ export const tools: Tool[] = [
     mbd_relevance: 'high',
     tags: ['No-Code ML', 'Surrogate Model', 'Crash', 'NVH', 'Aerodynamics', 'CoreWeave', 'Test Reduction'],
   },
+  {
+    name: 'Ansys optiSLang',
+    developer: 'Ansys (Synopsys傘下)',
+    category: 'CAE / Simulation AI',
+    description:
+      'Ansysの設計最適化・不確かさ定量化（UQ）プラットフォーム。2026 R1（2026年3月）でSimAIネイティブ統合を実現し、DoEケース生成→GPU並列シミュレーション→AIサロゲート訓練→最適化探索を単一ワークフロー内で完結できるようになった。新たなDLS（減衰最小二乗法）キャリブレーションアルゴリズムにより実測ダイノデータへのノイズ耐性フィッティングが改善。Rocky・FreeFlow・LS-OPTの新ソルバー接続も追加。Python APIのモジュール化によりHPC・クラウド展開が容易化。',
+    official_url: 'https://www.ansys.com/products/optislang',
+    use_cases: ['空力形状多目的最適化', 'パワートレインキャリブレーション', 'ロバスト設計最適化（RDO）', '不確かさ定量化（UQ）', 'SimAI連携サロゲート最適化'],
+    mbd_relevance: 'high',
+    tags: ['Design Optimization', 'Surrogate Model', 'UQ', 'SimAI', 'Python', 'CAE', 'optiSLang'],
+  },
+  {
+    name: 'Saphira AI',
+    developer: 'Saphira AI',
+    category: 'AI Coding',
+    description:
+      '2025年登場のSaaS型ISO/SAE 21434 TARA（脅威分析・リスクアセスメント）自動化プラットフォーム。高レベルのアーキテクチャ図を入力するだけでISO 21434準拠のLevel-2 TARAを自動生成し、工数を約70%削減。複数ECUにまたがるシステム横断的な脅威シナリオ生成・STRIDE適用・攻撃パス分析・サイバーセキュリティ要件生成を全自動化する。2026年2月には車載半導体向けISO 21434対応を公開。FEVのTARA CopilotやDefenseWeaver（arXiv 2504.18083）と並ぶ次世代車載サイバーセキュリティAIの代表格。',
+    official_url: 'https://saphira.ai',
+    use_cases: ['ISO 21434 TARA自動生成', '脅威シナリオ・攻撃パス分析', 'サイバーセキュリティ要件生成', 'AUTOSAR SecOC設計支援', '複数ECUシステムの横断的脅威分析'],
+    mbd_relevance: 'medium',
+    tags: ['ISO 21434', 'TARA', 'Cybersecurity', 'Automotive', 'AUTOSAR', 'LLM'],
+  },
 ];
