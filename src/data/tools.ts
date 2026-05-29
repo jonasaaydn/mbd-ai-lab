@@ -241,4 +241,26 @@ export const tools: Tool[] = [
     mbd_relevance: 'medium',
     tags: ['ISO 21434', 'TARA', 'Cybersecurity', 'Automotive', 'AUTOSAR', 'LLM'],
   },
+  {
+    name: 'Sourcegraph Amp',
+    developer: 'Sourcegraph',
+    category: 'AI Coding',
+    description:
+      'Sourcegraphが提供する無料AIコーディングエージェント。VS Code・Cursor・Windsurf・JetBrains・CLIに対応し、MCP（Model Context Protocol）をビルトインサポート。2026年以降、MATLAB MCP ServerおよびSimulink Agentic Toolkitと正式に連携し、Simulinkモデルの参照モデル分割・加速器モード化・テストケース自動生成などのMBDワークフローを自律実行できる。Claude Code・GitHub Copilot Agentと同等のMBDスキルセットを完全無料（広告サポート）で利用できる点が最大の特徴。',
+    official_url: 'https://sourcegraph.com/amp',
+    use_cases: ['Simulinkモデル参照モデル分割', '加速器モード自動最適化', 'MATLABスクリプト自動リファクタリング', 'テストケース自動生成', 'コードグラフ活用の依存関係解析'],
+    mbd_relevance: 'high',
+    tags: ['AI Agent', 'MCP', 'Simulink', 'MATLAB', 'Free', 'Refactoring', 'Coding'],
+  },
+  {
+    name: 'Emmi AI / Noether Framework',
+    developer: 'Emmi AI',
+    category: 'CAE / Simulation AI',
+    description:
+      'ドイツ発エンジニアリングAIスタートアップEmmi AIが2026年1月にオープンソース公開したPhysics AI深層学習フレームワーク。中核技術「AB-UPT（Anchored-Branched Universal Physics Transformers）」はGPU1枚で9百万サーフェス＋1億4000万ボリュームセルの自動車CFDを推論し、従来手法比100倍超のスケールを達成。発散ゼロ渦度定式化で物理的整合性をハード保証し、CADジオメトリから直接推論できる。学習は約100ケース・1GPU・1日以内で完了。arXiv 2502.09692で発表、GitHub: Emmi-AI/noetherで全コード公開済み。',
+    official_url: 'https://github.com/Emmi-AI/noether',
+    use_cases: ['自動車空力CFDサロゲートモデル構築', 'CAD直接入力による形状評価', 'GPU1枚での100点超パラメータスタディ', '発散ゼロ物理制約付き推論', 'optiSLang連携マルチフィデリティ最適化'],
+    mbd_relevance: 'high',
+    tags: ['CFD', 'Surrogate Model', 'Physics AI', 'Open Source', 'Transformer', 'Automotive', 'Aerodynamics'],
+  },
 ];
