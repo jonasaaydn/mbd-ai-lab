@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ArticleCard from '../../components/ArticleCard.astro';
+import CategoryIllustration from '../../components/CategoryIllustration.astro';
 import { categoryToSlug } from '../../utils/categories';
 import { getReadingTime } from '../../utils/reading-time';
 
@@ -92,6 +93,11 @@ const related = allPosts
           </div>
         </div>
       </div>
+    </div>
+
+    <!-- カテゴリイラスト -->
+    <div class="article-illustration">
+      <CategoryIllustration category={category} />
     </div>
 
     <div class="container article-layout">
@@ -281,6 +287,20 @@ const related = allPosts
     background: rgba(255, 255, 255, 0.1);
     color: #cbd5e1;
     border-color: rgba(255, 255, 255, 0.15);
+  }
+
+  /* Illustration */
+  .article-illustration {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 1.25rem;
+  }
+
+  .article-illustration svg {
+    width: 100%;
+    height: auto;
+    border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+    display: block;
   }
 
   /* Layout */
