@@ -103,11 +103,11 @@ export const tools: Tool[] = [
     developer: 'NVIDIA',
     category: 'CAE / Simulation AI',
     description:
-      'NVIDIAのオープンソース物理AI深層学習フレームワーク。v2.0（2026年3月）でモジュール型PyTorch-nativeアーキテクチャに大幅刷新。DGLバックエンドをPyTorch Geometricに統一しコンポーザビリティを強化。DoMINO NIMマイクロサービスは航空宇宙・自動車各社が採用し従来シミュレーション比最大500倍の高速化を実現。Siemensとの提携でIndustrial AI OS統合も進む。',
+      'NVIDIAのオープンソース物理AI深層学習フレームワーク。v2.0（2026年3月）でモジュール型PyTorch-nativeアーキテクチャに大幅刷新。v2.1（2026年5月）ではDoMINO NIMを新版に更新し、複数車両クラスにわたる精度向上とエンドツーエンド学習レシピの10倍高速化を達成。KAN（Kolmogorov–Arnold Networks）を用いた洪水ダイナミクス向けGNN、構造力学サロゲート（MeshGraphNet）サンプルも追加。uv/pip・Linux/macOS/Windows対応でインストールが容易化。Luminary Cloud・nTop・Siemensとの提携でIndustrial AI統合が進む。',
     official_url: 'https://github.com/NVIDIA/physicsnemo',
-    use_cases: ['PINNによるCFD高速化', '熱流体サロゲートモデル', '乱流モデリング', 'DoMINO NIMによる高速推論', '設計最適化ループ加速'],
+    use_cases: ['PINNによるCFD高速化', '熱流体サロゲートモデル', '乱流モデリング', 'DoMINO NIMによる高速推論', '設計最適化ループ加速', '構造力学サロゲートモデル'],
     mbd_relevance: 'high',
-    tags: ['PINN', 'Physics AI', 'CFD', 'Open Source', 'GPU', 'PyTorch Geometric'],
+    tags: ['PINN', 'Physics AI', 'CFD', 'Open Source', 'GPU', 'PyTorch Geometric', 'DoMINO', 'KAN'],
   },
   {
     name: 'Neural Concept',
@@ -251,6 +251,17 @@ export const tools: Tool[] = [
     use_cases: ['Simulinkモデル参照モデル分割', '加速器モード自動最適化', 'MATLABスクリプト自動リファクタリング', 'テストケース自動生成', 'コードグラフ活用の依存関係解析'],
     mbd_relevance: 'high',
     tags: ['AI Agent', 'MCP', 'Simulink', 'MATLAB', 'Free', 'Refactoring', 'Coding'],
+  },
+  {
+    name: 'Luminary Cloud SHIFT',
+    developer: 'Luminary Cloud',
+    category: 'CAE / Simulation AI',
+    description:
+      '米国スタートアップLuminary CloudがHondaとNVIDIAと共同開発した物理AI基盤モデルスイート「SHIFT」。SHIFT-SUV（2025年4月）は自動車SUV空力解析向けの世界初オープンソース物理AI基盤モデルで、AeroSUVパラメトリックジオメトリを用いた高精度DDES CFDシミュレーション1,000件超で事前学習済み。NVIDIA PhysicsNeMoのDoMINOアーキテクチャを採用し、STLジオメトリ入力から抵抗・揚力係数と表面圧力場全分布をミリ秒推論する。データセットと学習済みモデルをCC-BY-NC-4.0でHuggingFaceに公開。25,000シミュレーションへの拡張と航空機翼型向けSHIFT-WINGも展開中。nTopとの連携でジオメトリ生成→GPU CFD→物理AI訓練を1日で完結するパイプラインも構築済み。',
+    official_url: 'https://huggingface.co/datasets/luminary-shift/SUV',
+    use_cases: ['設計初期フェーズの空力バリアントスクリーニング', '1,000形状を数時間で評価するパラメータスタディ', 'ファインチューニングによる社内専用サロゲートモデル構築', 'CFDデータ生成コストの大幅削減', 'nTop連携による形状生成→AI評価ループ'],
+    mbd_relevance: 'high',
+    tags: ['Physics AI', 'Foundation Model', 'CFD', 'Aerodynamics', 'Open Source', 'DoMINO', 'Honda', 'NVIDIA', 'Automotive'],
   },
   {
     name: 'Emmi AI / Noether Framework',
