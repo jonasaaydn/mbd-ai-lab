@@ -247,7 +247,7 @@ export const tools: Tool[] = [
     category: 'AI Coding',
     description:
       'Sourcegraphが提供する無料AIコーディングエージェント。VS Code・Cursor・Windsurf・JetBrains・CLIに対応し、MCP（Model Context Protocol）をビルトインサポート。2026年以降、MATLAB MCP ServerおよびSimulink Agentic Toolkitと正式に連携し、Simulinkモデルの参照モデル分割・加速器モード化・テストケース自動生成などのMBDワークフローを自律実行できる。Claude Code・GitHub Copilot Agentと同等のMBDスキルセットを完全無料（広告サポート）で利用できる点が最大の特徴。',
-    official_url: 'https://ampcode.com',
+    official_url: 'https://sourcegraph.com/amp',
     use_cases: ['Simulinkモデル参照モデル分割', '加速器モード自動最適化', 'MATLABスクリプト自動リファクタリング', 'テストケース自動生成', 'コードグラフ活用の依存関係解析'],
     mbd_relevance: 'high',
     tags: ['AI Agent', 'MCP', 'Simulink', 'MATLAB', 'Free', 'Refactoring', 'Coding'],
