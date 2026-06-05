@@ -274,4 +274,15 @@ export const tools: Tool[] = [
     mbd_relevance: 'high',
     tags: ['CFD', 'Surrogate Model', 'Physics AI', 'Open Source', 'Transformer', 'Automotive', 'Aerodynamics'],
   },
+  {
+    name: 'JetBrains Air',
+    developer: 'JetBrains',
+    category: 'AI Coding',
+    description:
+      'JetBrainsが2026年3月に公開プレビューを開始したエージェント型開発環境（Agentic IDE）。Claude Agent・OpenAI Codex・Gemini CLI・Junieを単一プロジェクト内で同時並列実行でき、各エージェントが独立したGitワークツリーまたはDockerコンテナで作業する。MATLAB MCP Serverと組み合わせれば、制御設計・テスト生成・ドキュメント更新を複数AIが並行処理できる。macOS版は無料（プレビュー）、有料AI Proプラン（月$8）または自前APIキーで利用可能。',
+    official_url: 'https://air.dev',
+    use_cases: ['複数AIエージェントのMBDタスク並列実行', 'MATLAB MCP経由での自律Simulink操作', 'Gitワークツリーによる安全な並列開発', 'CI/CDパイプラインへのJunie CLI統合', 'MCP経由での外部ツール連携'],
+    mbd_relevance: 'high',
+    tags: ['Multi-Agent', 'Agentic IDE', 'MCP', 'Parallel Development', 'MATLAB', 'Simulink', 'Junie'],
+  },
 ];
