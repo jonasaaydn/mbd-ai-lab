@@ -1,0 +1,70 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+const base = import.meta.env.BASE_URL;
+---
+
+<BaseLayout
+  title="記事検索"
+  description="MBD×AI Lab の全記事をキーワードで検索できます"
+>
+  <div class="container search-page">
+    <div class="page-header">
+      <h1>記事検索</h1>
+      <p class="page-desc">Simulink・CFD・学生フォーミュラなど 100 件以上の記事をキーワードで検索</p>
+    </div>
+    <div id="search"></div>
+  </div>
+</BaseLayout>
+
+<link rel="stylesheet" href={`${base}pagefind/pagefind-ui.css`} />
+<script define:vars={{ base }}>
+  const s = document.createElement('script');
+  s.src = base + 'pagefind/pagefind-ui.js';
+  s.onload = () => {
+    new PagefindUI({
+      element: '#search',
+      showImages: false,
+      resetStyles: false,
+    });
+  };
+  document.head.appendChild(s);
+</script>
+
+<style>
+  .page-header {
+    padding: 2.5rem 0 2rem;
+    border-bottom: 1px solid var(--color-border);
+    margin-bottom: 2rem;
+  }
+  .page-header h1 { margin-bottom: 0.5rem; }
+  .page-desc {
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+    margin: 0;
+  }
+  .search-page {
+    padding-bottom: 4rem;
+    min-height: 60vh;
+  }
+
+  /* Pagefind UI の色をサイトデザインに合わせる */
+  :root {
+    --pagefind-ui-scale: 1;
+    --pagefind-ui-primary: #dc2626;
+    --pagefind-ui-text: var(--color-text);
+    --pagefind-ui-background: var(--color-bg);
+    --pagefind-ui-border: var(--color-border);
+    --pagefind-ui-tag: var(--color-bg-subtle);
+    --pagefind-ui-border-width: 1px;
+    --pagefind-ui-border-radius: 8px;
+    --pagefind-ui-font: var(--font-sans);
+  }
+
+  /* 検索入力欄のフォーカス色 */
+  :global(.pagefind-ui__search-input:focus) {
+    outline-color: #dc2626;
+  }
+  :global(.pagefind-ui__search-clear) {
+    color: var(--color-text-muted);
+  }
+</style>

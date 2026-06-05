@@ -1,10 +1,20 @@
 ---
+import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ToolCard from '../../components/ToolCard.astro';
 import { tools } from '../../data/tools';
 
 const base = import.meta.env.BASE_URL;
 const toolCategories = [...new Set(tools.map((t) => t.category))];
+
+// ツール名 → 記事本数のマップを構築
+const allPosts = await getCollection('blog');
+const toolArticleCount: Record<string, number> = {};
+for (const post of allPosts) {
+  if (post.data.tool) {
+    toolArticleCount[post.data.tool] = (toolArticleCount[post.data.tool] ?? 0) + 1;
+  }
+}
 ---
 
 <BaseLayout
@@ -43,7 +53,13 @@ const toolCategories = [...new Set(tools.map((t) => t.category))];
             <span class="tool-count">{catTools.length} ツール</span>
           </div>
           <div class="grid-2">
-            {catTools.map((tool) => <ToolCard tool={tool} />)}
+            {catTools.map((tool) => (
+              <ToolCard
+                tool={tool}
+                articleCount={toolArticleCount[tool.name] ?? 0}
+                blogBase={base}
+              />
+            ))}
           </div>
         </section>
       );

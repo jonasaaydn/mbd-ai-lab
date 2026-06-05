@@ -11,7 +11,10 @@ const posts = allPosts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueO
 
 const url = Astro.url;
 const selectedCategory = url.searchParams.get('category') ?? '';
-const filteredPosts = selectedCategory
+const selectedTool = url.searchParams.get('tool') ?? '';
+const filteredPosts = selectedTool
+  ? posts.filter((p) => p.data.tool === selectedTool)
+  : selectedCategory
   ? posts.filter((p) => categoryToSlug(p.data.category) === selectedCategory)
   : posts;
 ---
@@ -26,8 +29,16 @@ const filteredPosts = selectedCategory
       <p class="page-desc">全 {filteredPosts.length} 件の記事</p>
     </div>
 
+    <!-- Tool filter banner -->
+    {selectedTool && (
+      <div class="tool-filter-banner">
+        <span class="tool-filter-label">ツール: <strong>{selectedTool}</strong> の記事 {filteredPosts.length}本</span>
+        <a href={`${base}blog`} class="tool-filter-clear">× フィルターを解除</a>
+      </div>
+    )}
+
     <!-- Category Filter -->
-    <div class="filter-bar">
+    <div class="filter-bar" class:list={[{ hidden: !!selectedTool }]}>
       <a
         href={`${base}blog`}
         class:list={['filter-chip', { active: !selectedCategory }]}
@@ -116,6 +127,43 @@ const filteredPosts = selectedCategory
     background: var(--color-navy);
     color: #ffffff;
     border-color: var(--color-navy);
+  }
+
+  .tool-filter-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.75rem 1.1rem;
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    border-radius: var(--radius-md);
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .tool-filter-label {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  .tool-filter-label strong {
+    color: var(--color-accent);
+  }
+
+  .tool-filter-clear {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--color-accent);
+    white-space: nowrap;
+  }
+
+  .tool-filter-clear:hover {
+    text-decoration: underline;
+  }
+
+  .filter-bar.hidden {
+    display: none;
   }
 
   .empty-state {

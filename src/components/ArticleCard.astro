@@ -19,6 +19,9 @@ const { slug, title, date, category, tags, tool, importance, summary, readingTim
 
 const colors = CATEGORY_COLORS[category] ?? { from: '#0f172a', to: '#1e293b', label: category };
 
+// 7日以内の記事は NEW バッジを表示
+const isNew = (new Date().getTime() - date.getTime()) < 7 * 24 * 60 * 60 * 1000;
+
 const formattedDate = date.toLocaleDateString('ja-JP', {
   year: 'numeric',
   month: '2-digit',
@@ -108,6 +111,9 @@ const iconSvg = ICONS[category] ?? ICONS['Tool Comparison'];
         <svg viewBox="0 0 24 24" width="54" height="54" fill="none" set:html={iconSvg} />
       </div>
 
+      <!-- NEW バッジ（7日以内） -->
+      {isNew && <span class="thumb-new">NEW</span>}
+
       <!-- ツール名バッジ -->
       {tool && <span class="thumb-tool">{tool}</span>}
 
@@ -187,6 +193,21 @@ const iconSvg = ICONS[category] ?? ICONS['Tool Comparison'];
 
   .article-card:hover .thumb-icon {
     color: rgba(255, 255, 255, 0.35);
+  }
+
+  .thumb-new {
+    position: absolute;
+    top: 10px;
+    left: 12px;
+    font-size: 0.62rem;
+    font-weight: 800;
+    color: #fff;
+    background: var(--color-accent);
+    border-radius: 4px;
+    padding: 0.2em 0.6em;
+    letter-spacing: 0.1em;
+    font-family: var(--font-mono);
+    box-shadow: 0 1px 4px rgba(220, 38, 38, 0.45);
   }
 
   .thumb-tool {

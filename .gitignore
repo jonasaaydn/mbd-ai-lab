@@ -5,3 +5,5 @@ dist/
 .env.*
 !.env.example
 ROUTINE_PROMPT.md
+routine-*.txt
+routine-text.txt

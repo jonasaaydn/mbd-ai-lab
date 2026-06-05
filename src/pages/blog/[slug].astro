@@ -17,9 +17,12 @@ export async function getStaticPaths() {
 }
 
 const { post } = Astro.props;
-const { Content } = await post.render();
+const { Content, headings } = await post.render();
 
 const { title, date, category, tags, tool, official_url, importance, summary } = post.data;
+
+// 目次: h2・h3 のみ
+const tocHeadings = headings.filter((h) => h.depth === 2 || h.depth === 3);
 
 const formattedDate = date.toLocaleDateString('ja-JP', {
   year: 'numeric',
@@ -30,12 +33,30 @@ const formattedDate = date.toLocaleDateString('ja-JP', {
 const importanceLabel = { high: '重要', medium: '注目', low: '参考' }[importance];
 const readingTime = getReadingTime(post.body);
 
-// 関連記事: 同カテゴリから最新3件（自分自身を除く）
 const allPosts = await getCollection('blog');
+
+// 関連記事: 同カテゴリから最新3件（自分自身を除く）
 const related = allPosts
   .filter((p) => p.slug !== post.slug && p.data.category === category)
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
   .slice(0, 3);
+
+// シリーズ検出（スラグのプレフィックスで判定）
+const SERIES_PREFIXES: Record<string, string> = {
+  'student-formula-': '学生フォーミュラ実践シリーズ',
+  'weekly-ai-update-': 'Weekly AI Update',
+};
+const seriesEntry = Object.entries(SERIES_PREFIXES).find(([prefix]) => post.slug.startsWith(prefix));
+const seriesName = seriesEntry?.[1] ?? null;
+const seriesPrefix = seriesEntry?.[0] ?? null;
+const seriesPosts = seriesPrefix
+  ? allPosts
+      .filter((p) => p.slug.startsWith(seriesPrefix))
+      .sort((a, b) => a.data.date.valueOf() - b.data.date.valueOf())
+  : [];
+const seriesIndex = seriesPosts.findIndex((p) => p.slug === post.slug);
+const prevPost = seriesIndex > 0 ? seriesPosts[seriesIndex - 1] : null;
+const nextPost = seriesIndex < seriesPosts.length - 1 ? seriesPosts[seriesIndex + 1] : null;
 ---
 
 <BaseLayout
@@ -56,6 +77,11 @@ const related = allPosts
             {importanceLabel}
           </span>
           <span class="reading-time-badge">{readingTime} min read</span>
+          {seriesName && (
+            <span class="series-badge">
+              {seriesName} &mdash; {seriesIndex + 1}/{seriesPosts.length}
+            </span>
+          )}
         </div>
 
         <h1 class="article-title">{title}</h1>
@@ -101,11 +127,24 @@ const related = allPosts
     </div>
 
     <div class="container article-layout">
-      <div class="article-body prose">
+      <div class="article-body prose" data-pagefind-body>
         <Content />
       </div>
 
-      <aside class="article-sidebar">
+      <aside class="article-sidebar" data-pagefind-ignore>
+        {tocHeadings.length >= 3 && (
+          <div class="sidebar-card toc-card">
+            <h3 class="sidebar-title">目次</h3>
+            <nav class="toc">
+              {tocHeadings.map((h) => (
+                <a href={`#${h.slug}`} class:list={['toc-link', `toc-h${h.depth}`]}>
+                  {h.text}
+                </a>
+              ))}
+            </nav>
+          </div>
+        )}
+
         <div class="sidebar-card">
           <h3 class="sidebar-title">記事情報</h3>
           <dl class="sidebar-dl">
@@ -149,6 +188,33 @@ const related = allPosts
         <a href={`${base}blog`} class="btn btn-outline back-btn">← 記事一覧に戻る</a>
       </aside>
     </div>
+
+    <!-- シリーズナビゲーション -->
+    {seriesName && (prevPost || nextPost) && (
+      <div class="container series-nav">
+        <div class="series-nav-header">
+          <span class="series-nav-label">{seriesName}</span>
+        </div>
+        <div class="series-nav-grid">
+          <div class="series-nav-item">
+            {prevPost && (
+              <a href={`${base}blog/${prevPost.slug}`} class="series-nav-link prev">
+                <span class="series-nav-dir">← 前の記事</span>
+                <span class="series-nav-title">{prevPost.data.title}</span>
+              </a>
+            )}
+          </div>
+          <div class="series-nav-item">
+            {nextPost && (
+              <a href={`${base}blog/${nextPost.slug}`} class="series-nav-link next">
+                <span class="series-nav-dir">次の記事 →</span>
+                <span class="series-nav-title">{nextPost.data.title}</span>
+              </a>
+            )}
+          </div>
+        </div>
+      </div>
+    )}
 
     <!-- 関連記事 -->
     {related.length > 0 && (
@@ -468,6 +534,122 @@ const related = allPosts
     width: 100%;
     justify-content: center;
     font-size: 0.85rem;
+  }
+
+  /* シリーズバッジ */
+  .series-badge {
+    font-size: 0.68rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.75);
+    background: rgba(220, 38, 38, 0.35);
+    border: 1px solid rgba(220, 38, 38, 0.5);
+    border-radius: 4px;
+    padding: 0.2em 0.65em;
+    letter-spacing: 0.03em;
+  }
+
+  /* 目次 (TOC) */
+  .toc-card {
+    order: -1;
+  }
+
+  .toc {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+  }
+
+  .toc-link {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    padding: 0.3em 0.5em;
+    border-radius: var(--radius-sm);
+    line-height: 1.4;
+    transition: color 0.12s, background 0.12s;
+    text-decoration: none;
+  }
+
+  .toc-link:hover {
+    color: var(--color-accent);
+    background: var(--color-bg-muted);
+  }
+
+  .toc-h3 {
+    padding-left: 1.25rem;
+    font-size: 0.75rem;
+  }
+
+  /* シリーズナビゲーション */
+  .series-nav {
+    padding: 2.5rem 0;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .series-nav-header {
+    margin-bottom: 1rem;
+  }
+
+  .series-nav-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-accent);
+  }
+
+  .series-nav-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .series-nav-link {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    padding: 1rem 1.25rem;
+    background: var(--color-bg-subtle);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    text-decoration: none;
+    transition: border-color 0.15s, background 0.15s;
+  }
+
+  .series-nav-link:hover {
+    border-color: var(--color-accent);
+    background: #fef2f2;
+  }
+
+  .series-nav-link.next {
+    text-align: right;
+  }
+
+  .series-nav-dir {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--color-accent);
+    letter-spacing: 0.04em;
+  }
+
+  .series-nav-title {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-navy);
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  @media (max-width: 640px) {
+    .series-nav-grid {
+      grid-template-columns: 1fr;
+    }
+    .series-nav-link.next {
+      text-align: left;
+    }
   }
 
   /* 関連記事 */

@@ -3,9 +3,11 @@ import type { Tool } from '../data/tools';
 
 interface Props {
   tool: Tool;
+  articleCount?: number;
+  blogBase?: string;
 }
 
-const { tool } = Astro.props;
+const { tool, articleCount = 0, blogBase = '' } = Astro.props;
 
 const relevanceLabel = { high: 'MBD高関連', medium: '関連あり', low: '参考' }[tool.mbd_relevance];
 const relevanceClass = `relevance-${tool.mbd_relevance}`;
@@ -36,6 +38,11 @@ const relevanceClass = `relevance-${tool.mbd_relevance}`;
     <div class="tool-tags">
       {tool.tags.map((tag) => <span class="tag">{tag}</span>)}
     </div>
+    {articleCount > 0 && (
+      <a href={`${blogBase}blog?tool=${encodeURIComponent(tool.name)}`} class="articles-link">
+        記事 {articleCount}本 →
+      </a>
+    )}
     <a
       href={tool.official_url}
       target="_blank"
@@ -186,6 +193,23 @@ const relevanceClass = `relevance-${tool.mbd_relevance}`;
     display: flex;
     flex-wrap: wrap;
     gap: 0.3rem;
+  }
+
+  .articles-link {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--color-accent);
+    padding: 0.35em 0.75em;
+    border: 1px solid #fecaca;
+    border-radius: var(--radius-sm);
+    background: #fef2f2;
+    white-space: nowrap;
+    transition: background 0.15s;
+    flex-shrink: 0;
+  }
+
+  .articles-link:hover {
+    background: #fee2e2;
   }
 
   .tool-link {
