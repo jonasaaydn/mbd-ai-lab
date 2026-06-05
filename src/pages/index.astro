@@ -19,6 +19,12 @@ const featuredPosts = allPosts
   .slice(0, 3);
 
 const highlightTools = tools.filter((t) => t.mbd_relevance === 'high').slice(0, 4);
+
+// 役割別記事カウント（チームの担当から探すセクション用）
+const aeroPosts    = allPosts.filter((p) => p.data.category === 'CAE / Simulation AI');
+const mbdPosts     = allPosts.filter((p) => p.data.category === 'MBD / Simulink');
+const racePosts    = allPosts.filter((p) => p.data.category === 'Race Engineering Use Cases');
+const studentPosts = allPosts.filter((p) => p.slug.startsWith('student-formula-'));
 ---
 
 <BaseLayout title="ホーム">
@@ -40,6 +46,162 @@ const highlightTools = tools.filter((t) => t.mbd_relevance === 'high').slice(0, 
       </div>
     </div>
     <div class="hero-stripe" aria-hidden="true"></div>
+  </section>
+
+  <!-- ── 開発フロー × AI（Case B） ── -->
+  <section class="dev-flow">
+    <div class="container dev-flow-inner">
+      <div class="dev-flow-head">
+        <span class="flow-eyebrow">Development Flow × AI</span>
+        <h2 class="dev-flow-title">車両開発のどのフェーズでAIが使えるか</h2>
+        <p class="dev-flow-desc">設計・シミュレーション・制御設計・データ解析まで、開発の全工程でAIが活躍します</p>
+      </div>
+
+      <div class="flow-track">
+        <!-- Step 01 -->
+        <div class="flow-step">
+          <div class="step-badge">01</div>
+          <div class="step-body">
+            <h3>設計</h3>
+            <p>形状生成・軽量化最適化</p>
+            <ul class="step-tools">
+              <li>nTop — ラティス構造</li>
+              <li>AI CAD — 形状自動生成</li>
+            </ul>
+          </div>
+        </div>
+        <div class="flow-arrow" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+
+        <!-- Step 02 -->
+        <div class="flow-step">
+          <div class="step-badge">02</div>
+          <div class="step-body">
+            <h3>CFD・FEMシミュレーション</h3>
+            <p>空力・構造・サロゲートモデル</p>
+            <ul class="step-tools">
+              <li>Ansys SimAI — 高速CFD</li>
+              <li>STAR-CCM+ AI — 空力最適化</li>
+              <li>Neural Concept — DL代替</li>
+            </ul>
+          </div>
+        </div>
+        <div class="flow-arrow" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+
+        <!-- Step 03 -->
+        <div class="flow-step">
+          <div class="step-badge">03</div>
+          <div class="step-body">
+            <h3>制御・MBD開発</h3>
+            <p>Simulinkモデル・制御則自動設計</p>
+            <ul class="step-tools">
+              <li>Simulink Copilot</li>
+              <li>MATLAB Copilot</li>
+              <li>Claude Code + MCP</li>
+            </ul>
+          </div>
+        </div>
+        <div class="flow-arrow" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+
+        <!-- Step 04 -->
+        <div class="flow-step">
+          <div class="step-badge">04</div>
+          <div class="step-body">
+            <h3>テスト走行・データ解析</h3>
+            <p>テレメトリ解析・ラップ比較・改善</p>
+            <ul class="step-tools">
+              <li>Claude Code — CSV自動解析</li>
+              <li>Python AI — 改善点抽出</li>
+              <li>Monolith AI — セットアップ最適化</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── チームの担当から探す（Case A） ── -->
+  <section class="team-roles-wrap">
+    <div class="container">
+      <div class="section-header">
+        <h2>チームの担当から探す</h2>
+        <p class="roles-desc">学生フォーミュラチームの役割別に、すぐ使えるAIツール記事を紹介します</p>
+      </div>
+      <div class="role-grid">
+
+        <!-- 空力・CFD担当 -->
+        <a href={`${base}categories/cae-simulation-ai`} class="role-card">
+          <div class="role-icon">
+            <svg viewBox="0 0 32 32" width="36" height="36" fill="none">
+              <path d="M3 16 C7 8,11 24,16 16 C21 8,25 24,29 16" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+              <path d="M3 10 C7 2,11 18,16 10 C21 2,25 18,29 10" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" fill="none" opacity="0.4"/>
+              <path d="M3 22 C7 14,11 30,16 22 C21 14,25 30,29 22" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" fill="none" opacity="0.4"/>
+            </svg>
+          </div>
+          <h3>空力・CFD担当</h3>
+          <p>フロントウィング・ディフューザーのCFD解析精度向上と形状最適化の自動化</p>
+          <span class="role-count">{aeroPosts.length}本の記事を見る →</span>
+        </a>
+
+        <!-- 制御・MBD担当 -->
+        <a href={`${base}categories/mbd-simulink`} class="role-card">
+          <div class="role-icon">
+            <svg viewBox="0 0 32 32" width="36" height="36" fill="none">
+              <rect x="1"  y="11" width="8" height="8" rx="2" stroke="currentColor" stroke-width="1.8" fill="none"/>
+              <rect x="12" y="11" width="8" height="8" rx="2" stroke="currentColor" stroke-width="1.8" fill="none"/>
+              <rect x="23" y="11" width="8" height="8" rx="2" stroke="currentColor" stroke-width="1.8" fill="none"/>
+              <line x1="9"  y1="15" x2="12" y2="15" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              <line x1="20" y1="15" x2="23" y2="15" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              <line x1="5"  y1="11" x2="5"  y2="5"  stroke="currentColor" stroke-width="1.2" stroke-dasharray="2 2" opacity="0.5"/>
+              <path d="M5 5 Q5 3 27 3 Q27 3 27 5" stroke="currentColor" stroke-width="1.2" fill="none" opacity="0.5"/>
+              <line x1="27" y1="5" x2="27" y2="11" stroke="currentColor" stroke-width="1.2" stroke-dasharray="2 2" opacity="0.5"/>
+            </svg>
+          </div>
+          <h3>制御・MBD担当</h3>
+          <p>Simulinkモデルの自動生成・トラクションコントロール・PID制御則の設計支援</p>
+          <span class="role-count">{mbdPosts.length}本の記事を見る →</span>
+        </a>
+
+        <!-- 走行データ解析担当 -->
+        <a href={`${base}categories/race-engineering-use-cases`} class="role-card">
+          <div class="role-icon">
+            <svg viewBox="0 0 32 32" width="36" height="36" fill="none">
+              <polyline points="2,24 6,11 10,19 14,8 18,20 22,12 28,22" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+              <line x1="2" y1="26" x2="30" y2="26" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" opacity="0.35"/>
+              <line x1="2" y1="6"  x2="2"  y2="26" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" opacity="0.35"/>
+            </svg>
+          </div>
+          <h3>走行データ解析担当</h3>
+          <p>テスト走行後のCSVを自動解析・ラップタイム比較・ドライバーへのフィードバック生成</p>
+          <span class="role-count">{racePosts.length}本の記事を見る →</span>
+        </a>
+
+        <!-- 学生フォーミュラ実践 -->
+        <a href={`${base}categories/race-engineering-use-cases`} class="role-card role-card-student">
+          <div class="role-icon">
+            <svg viewBox="0 0 32 32" width="36" height="36" fill="none">
+              <circle cx="16" cy="16" r="12" stroke="currentColor" stroke-width="2" fill="none"/>
+              <circle cx="16" cy="16" r="3.5" fill="currentColor" opacity="0.9"/>
+              <line x1="16" y1="12.5" x2="16" y2="5"   stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              <line x1="12.5" y1="13.5" x2="6.5" y2="10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              <line x1="12.5" y1="18.5" x2="6.5" y2="22" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              <line x1="19.5" y1="13.5" x2="25.5" y2="10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              <line x1="19.5" y1="18.5" x2="25.5" y2="22" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              <line x1="16" y1="19.5" x2="16" y2="27" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h3>学生フォーミュラ 実践ガイド</h3>
+          <p>実際に動くコードとステップバイステップ手順で今日から試せる実践シリーズ</p>
+          <span class="role-count">{studentPosts.length}本の実践記事を見る →</span>
+        </a>
+
+      </div>
+    </div>
   </section>
 
   <div class="container">
@@ -200,6 +362,229 @@ const highlightTools = tools.filter((t) => t.mbd_relevance === 'high').slice(0, 
       rgba(220, 38, 38, 0.06) 36px
     );
     pointer-events: none;
+  }
+
+  /* ── 開発フロー × AI ── */
+  .dev-flow {
+    background: #f1f5f9;
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+    padding: 3rem 0;
+  }
+
+  .dev-flow-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .dev-flow-head {
+    text-align: center;
+  }
+
+  .flow-eyebrow {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    font-family: var(--font-mono);
+    margin-bottom: 0.6rem;
+  }
+
+  .dev-flow-title {
+    font-size: clamp(1.2rem, 3vw, 1.65rem);
+    font-weight: 800;
+    color: var(--color-navy);
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.02em;
+  }
+
+  .dev-flow-desc {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    margin: 0;
+  }
+
+  /* フロートラック */
+  .flow-track {
+    display: flex;
+    align-items: flex-start;
+    gap: 0;
+  }
+
+  .flow-step {
+    flex: 1;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 1.25rem 1.1rem 1.1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    min-width: 0;
+  }
+
+  .step-badge {
+    font-size: 0.7rem;
+    font-weight: 800;
+    font-family: var(--font-mono);
+    color: var(--color-accent);
+    letter-spacing: 0.08em;
+    margin-bottom: 0.1rem;
+  }
+
+  .flow-step h3 {
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: var(--color-navy);
+    margin: 0;
+    line-height: 1.3;
+  }
+
+  .flow-step p {
+    font-size: 0.78rem;
+    color: var(--color-text-muted);
+    margin: 0;
+    line-height: 1.4;
+  }
+
+  .step-tools {
+    list-style: none;
+    padding: 0;
+    margin: 0.25rem 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .step-tools li {
+    font-size: 0.76rem;
+    color: var(--color-text);
+    padding-left: 0.8rem;
+    position: relative;
+    line-height: 1.45;
+  }
+
+  .step-tools li::before {
+    content: '›';
+    position: absolute;
+    left: 0;
+    color: var(--color-accent);
+    font-weight: 700;
+  }
+
+  .flow-arrow {
+    display: flex;
+    align-items: center;
+    padding: 1.5rem 0.3rem 0;
+    color: #94a3b8;
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 900px) {
+    .flow-track {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .flow-arrow {
+      padding: 0 0 0 1rem;
+      transform: rotate(90deg);
+      align-self: flex-start;
+    }
+  }
+
+  /* ── チームの担当から探す ── */
+  .team-roles-wrap {
+    padding: 3rem 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .roles-desc {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    margin: 0.25rem 0 0;
+  }
+
+  .role-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin-top: 1.75rem;
+  }
+
+  .role-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+    padding: 1.4rem 1.25rem 1.2rem;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    text-decoration: none;
+    color: inherit;
+    transition: box-shadow 0.15s, transform 0.15s, border-color 0.15s;
+  }
+
+  .role-card:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-2px);
+    border-color: var(--color-navy-mid);
+  }
+
+  .role-card-student {
+    border-color: #fecaca;
+    background: #fff8f8;
+  }
+
+  .role-card-student:hover {
+    border-color: var(--color-accent);
+  }
+
+  .role-icon {
+    color: var(--color-accent);
+    margin-bottom: 0.1rem;
+  }
+
+  .role-card-student .role-icon {
+    color: var(--color-accent);
+  }
+
+  .role-card h3 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--color-navy);
+    margin: 0;
+    line-height: 1.3;
+  }
+
+  .role-card p {
+    font-size: 0.82rem;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+    margin: 0;
+    flex-grow: 1;
+  }
+
+  .role-count {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--color-accent);
+    margin-top: auto;
+    font-family: var(--font-mono);
+  }
+
+  @media (max-width: 900px) {
+    .role-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .role-grid {
+      grid-template-columns: 1fr;
+    }
   }
 
   /* Categories */
