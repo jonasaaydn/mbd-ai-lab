@@ -11,12 +11,16 @@ const posts = allPosts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueO
 
 const url = Astro.url;
 const selectedCategory = url.searchParams.get('category') ?? '';
-const selectedTool = url.searchParams.get('tool') ?? '';
-const filteredPosts = selectedTool
-  ? posts.filter((p) => p.data.tool === selectedTool)
-  : selectedCategory
-  ? posts.filter((p) => categoryToSlug(p.data.category) === selectedCategory)
-  : posts;
+const selectedTool     = url.searchParams.get('tool') ?? '';
+const selectedSeries   = url.searchParams.get('series') ?? '';
+const filteredPosts =
+  selectedSeries === 'student-formula'
+    ? posts.filter((p) => p.slug.startsWith('student-formula-'))
+    : selectedTool
+    ? posts.filter((p) => p.data.tool === selectedTool)
+    : selectedCategory
+    ? posts.filter((p) => categoryToSlug(p.data.category) === selectedCategory)
+    : posts;
 ---
 
 <BaseLayout
@@ -29,16 +33,27 @@ const filteredPosts = selectedTool
       <p class="page-desc">全 {filteredPosts.length} 件の記事</p>
     </div>
 
-    <!-- Tool filter banner -->
-    {selectedTool && (
+    <!-- Series / Tool filter banner -->
+    {(selectedTool || selectedSeries) && (
       <div class="tool-filter-banner">
-        <span class="tool-filter-label">ツール: <strong>{selectedTool}</strong> の記事 {filteredPosts.length}本</span>
+        {selectedSeries === 'student-formula' && (
+          <span class="tool-filter-label">学生フォーミュラ実践ガイド — <strong>{filteredPosts.length}本</strong>の記事</span>
+        )}
+        {selectedTool && (
+          <span class="tool-filter-label">ツール: <strong>{selectedTool}</strong> の記事 {filteredPosts.length}本</span>
+        )}
         <a href={`${base}blog`} class="tool-filter-clear">× フィルターを解除</a>
       </div>
     )}
 
     <!-- Category Filter -->
-    <div class="filter-bar" class:list={[{ hidden: !!selectedTool }]}>
+    <div class="filter-bar" class:list={[{ hidden: !!(selectedTool || selectedSeries) }]}>
+      <a
+        href={`${base}blog?series=student-formula`}
+        class:list={['filter-chip', 'filter-chip-student', { active: selectedSeries === 'student-formula' }]}
+      >
+        学生フォーミュラ実践
+      </a>
       <a
         href={`${base}blog`}
         class:list={['filter-chip', { active: !selectedCategory }]}
@@ -127,6 +142,20 @@ const filteredPosts = selectedTool
     background: var(--color-navy);
     color: #ffffff;
     border-color: var(--color-navy);
+  }
+
+  .filter-chip-student {
+    border-color: #fecaca;
+    color: var(--color-accent);
+    background: #fff8f8;
+    font-weight: 600;
+  }
+
+  .filter-chip-student:hover,
+  .filter-chip-student.active {
+    background: var(--color-accent);
+    color: #ffffff;
+    border-color: var(--color-accent);
   }
 
   .tool-filter-banner {

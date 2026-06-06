@@ -37,15 +37,101 @@ const studentPosts = allPosts.filter((p) => p.slug.startsWith('student-formula-'
         AI ツール情報ラボ
       </h1>
       <p class="hero-desc">
-        レース車両開発・モデルベース開発（MBD）・CAE・走行データ解析に携わるエンジニア向けに、<br class="br-md" />
+        レース車両開発・MBD・CAE・走行データ解析に携わるエンジニア・学生チーム向けに、<br class="br-md" />
         AIツールの最新情報・使い方・実践事例をまとめた技術ブログです。
       </p>
       <div class="hero-actions">
         <a href={`${base}blog`} class="btn btn-primary">記事を読む</a>
+        <a href={`${base}blog?series=student-formula`} class="btn btn-student">学生フォーミュラ実践ガイド</a>
         <a href={`${base}tools`} class="btn btn-outline">AIツール一覧</a>
       </div>
     </div>
     <div class="hero-stripe" aria-hidden="true"></div>
+  </section>
+
+  <!-- ── 悩みから探す（Pain Points） ── -->
+  <section class="pain-points">
+    <div class="container">
+      <div class="section-header">
+        <h2>こんな悩みはありませんか？</h2>
+        <p class="pain-desc">学生フォーミュラチームでよく直面する4つの課題と、AIによる解決策・実績値</p>
+      </div>
+      <div class="pain-grid">
+
+        <!-- CFD解析 -->
+        <a href={`${base}blog/student-formula-cfd-ai-surrogate-2026`} class="pain-card">
+          <p class="pain-quote">CFD 1回のシミュレーションに 8〜12時間かかって、形状最適化が間に合わない</p>
+          <span class="pain-tool">Ansys SimAI・Gaussian Process サロゲートモデル</span>
+          <div class="pain-metric">
+            <div class="metric-before">
+              <span class="metric-val">8〜12時間</span>
+              <span class="metric-label">従来の1回実行</span>
+            </div>
+            <span class="metric-arrow">→</span>
+            <div class="metric-after">
+              <span class="metric-val">数分</span>
+              <span class="metric-label">学習後のAI予測</span>
+            </div>
+          </div>
+          <span class="pain-cta">この記事で解決する →</span>
+        </a>
+
+        <!-- Simulink -->
+        <a href={`${base}blog/student-formula-simulink-copilot-vehicle-dynamics-2026`} class="pain-card">
+          <p class="pain-quote">Simulinkのブロック線図をどう繋げばいいか分からなくて、3日かけても動かない</p>
+          <span class="pain-tool">Simulink Copilot（MATLAB R2024b以降・学校ライセンス対応）</span>
+          <div class="pain-metric">
+            <div class="metric-before">
+              <span class="metric-val">1〜2週間</span>
+              <span class="metric-label">初心者の構築時間</span>
+            </div>
+            <span class="metric-arrow">→</span>
+            <div class="metric-after">
+              <span class="metric-val">半日</span>
+              <span class="metric-label">Copilotで自動生成</span>
+            </div>
+          </div>
+          <span class="pain-cta">この記事で解決する →</span>
+        </a>
+
+        <!-- 走行データ解析 -->
+        <a href={`${base}blog/student-formula-claude-code-lap-data-analysis-2026`} class="pain-card">
+          <p class="pain-quote">テスト走行後のCSV解析に毎回2〜3時間かかって、次のセッション準備が遅れる</p>
+          <span class="pain-tool">Claude Code + Python（無料で試せる）</span>
+          <div class="pain-metric">
+            <div class="metric-before">
+              <span class="metric-val">2〜3時間</span>
+              <span class="metric-label">手作業の解析</span>
+            </div>
+            <span class="metric-arrow">→</span>
+            <div class="metric-after">
+              <span class="metric-val">15分</span>
+              <span class="metric-label">自動レポート生成</span>
+            </div>
+          </div>
+          <span class="pain-cta">この記事で解決する →</span>
+        </a>
+
+        <!-- PIDゲイン -->
+        <a href={`${base}blog/student-formula-cursor-matlab-mcp-control-design-2026`} class="pain-card">
+          <p class="pain-quote">PIDゲインの調整が手探りで、1回変えるたびに10〜15分かかって時間が溶ける</p>
+          <span class="pain-tool">Cursor + MATLAB MCP（自然言語でゲイン調整）</span>
+          <div class="pain-metric">
+            <div class="metric-before">
+              <span class="metric-val">10〜15分/回</span>
+              <span class="metric-label">手動調整サイクル</span>
+            </div>
+            <span class="metric-arrow">→</span>
+            <div class="metric-after">
+              <span class="metric-val">30秒</span>
+              <span class="metric-label">チャットで即修正</span>
+            </div>
+          </div>
+          <span class="pain-cta">この記事で解決する →</span>
+        </a>
+
+      </div>
+    </div>
   </section>
 
   <!-- ── 開発フロー × AI（Case B） ── -->
@@ -241,10 +327,10 @@ const studentPosts = allPosts.filter((p) => p.slug.startsWith('student-formula-'
       </div>
     </section>
 
-    <!-- MBD Featured -->
+    <!-- Featured -->
     <section class="section mbd-section">
       <div class="section-header">
-        <h2>MBD エンジニアにおすすめ</h2>
+        <h2>実践事例・注目記事</h2>
         <a href={`${base}categories/race-engineering-use-cases`} class="section-link">もっと見る →</a>
       </div>
       <div class="grid-3">
@@ -362,6 +448,154 @@ const studentPosts = allPosts.filter((p) => p.slug.startsWith('student-formula-'
       rgba(220, 38, 38, 0.06) 36px
     );
     pointer-events: none;
+  }
+
+  /* 学生向け Hero CTA */
+  .btn-student {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.55em 1.1em;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(220, 38, 38, 0.6);
+    color: #fca5a5;
+    background: rgba(220, 38, 38, 0.12);
+    transition: background 0.15s, color 0.15s;
+    white-space: nowrap;
+  }
+  .btn-student:hover {
+    background: rgba(220, 38, 38, 0.25);
+    color: #fff;
+  }
+
+  /* ── 悩みから探す（Pain Points） ── */
+  .pain-points {
+    padding: 3.5rem 0;
+    background: var(--color-bg);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .pain-desc {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    margin: 0.25rem 0 0;
+  }
+
+  .pain-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.1rem;
+    margin-top: 1.75rem;
+  }
+
+  .pain-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    padding: 1.4rem 1.35rem;
+    background: #fafafa;
+    border: 1px solid var(--color-border);
+    border-left: 3px solid var(--color-accent);
+    border-radius: var(--radius-lg);
+    text-decoration: none;
+    color: inherit;
+    transition: box-shadow 0.15s, transform 0.15s;
+  }
+
+  .pain-card:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-2px);
+  }
+
+  .pain-quote {
+    font-size: 0.9rem;
+    color: var(--color-navy);
+    line-height: 1.65;
+    font-weight: 500;
+    margin: 0;
+    padding-left: 0.75rem;
+    border-left: none;
+    position: relative;
+  }
+
+  .pain-quote::before {
+    content: '"';
+    position: absolute;
+    left: 0;
+    top: -0.1em;
+    font-size: 1.4em;
+    color: var(--color-accent);
+    opacity: 0.6;
+    line-height: 1;
+  }
+
+  .pain-tool {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--color-text-muted);
+    background: var(--color-bg-subtle);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    padding: 0.3em 0.75em;
+    align-self: flex-start;
+  }
+
+  .pain-metric {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 0.8rem 1rem;
+  }
+
+  .metric-before,
+  .metric-after {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    flex: 1;
+  }
+
+  .metric-before { text-align: left; }
+  .metric-after  { text-align: right; }
+
+  .metric-val {
+    font-size: 1.05rem;
+    font-weight: 800;
+    font-family: var(--font-mono);
+    line-height: 1.1;
+  }
+
+  .metric-before .metric-val { color: #94a3b8; }
+  .metric-after  .metric-val { color: var(--color-accent); }
+
+  .metric-label {
+    font-size: 0.65rem;
+    color: var(--color-text-subtle);
+    letter-spacing: 0.02em;
+    line-height: 1.3;
+  }
+
+  .metric-arrow {
+    font-size: 1.3rem;
+    color: #cbd5e1;
+    flex-shrink: 0;
+    font-weight: 300;
+  }
+
+  .pain-cta {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--color-accent);
+    margin-top: auto;
+  }
+
+  @media (max-width: 640px) {
+    .pain-grid { grid-template-columns: 1fr; }
   }
 
   /* ── 開発フロー × AI ── */
