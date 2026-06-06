@@ -180,7 +180,7 @@ export const tools: Tool[] = [
     developer: 'Amazon Web Services',
     category: 'AI Coding',
     description:
-      'AWSのAIコーディングアシスタント。2025年5月にAUTOSAR/SDV（ソフトウェア定義車両）向けの公式ブログを公開し、自動車組込みソフトウェア開発への適用例を実証。インラインコードコメントからAUTOSAR SWC（ソフトウェアコンポーネント）のC/C++コードおよびARXML設定ファイルを自動生成。VS Code・JetBrainsに統合されワークスペースのコンテキストを理解した上でAUTOSAR準拠コードを生成・リファクタリング・デバッグする。SWE-Bench Verifiedで66%を達成（2025年4月）。',
+      'AWSのAIコーディングアシスタント。2025年5月にAUTOSAR/SDV（ソフトウェア定義車両）向けの公式ブログを公開し、AUTOSAR SWC（ソフトウェアコンポーネント）のC/C++コードおよびARXML設定ファイルを自動生成する手法を実証。VS Code・JetBrainsに統合されワークスペースのコンテキストを理解した上でAUTOSAR準拠コードを生成・リファクタリング・デバッグする。SWE-Bench Verified 66%達成（2025年4月）。⚠️ 注意：2026年5月15日以降は新規サインアップが停止されており、既存ユーザーのみ継続利用可能（AWSコンソール内機能は継続）。後継としてAmazon Bedrockベースのカスタムエージェント（Aumovio等）が台頭している。',
     official_url: 'https://aws.amazon.com/q/developer/',
     use_cases: ['AUTOSAR SWCコード生成', 'ARXML設定ファイル自動生成', '組込みC/C++リファクタリング', 'SDV開発支援', 'コードレビュー自動化'],
     mbd_relevance: 'medium',
