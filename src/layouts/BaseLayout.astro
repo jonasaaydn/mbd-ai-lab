@@ -1,6 +1,7 @@
 ---
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import { SITE } from '../site.config';
 import '../styles/global.css';
 
 interface Props {
@@ -8,21 +9,49 @@ interface Props {
   description?: string;
   ogType?: 'website' | 'article';
   canonicalPath?: string;
+  /** サイトルートからの画像パス（例: '/og-image.png'）。未指定ならブランド既定画像。 */
+  ogImage?: string;
+  /** 構造化データ（JSON-LD）。記事ページでは BlogPosting / BreadcrumbList を渡す。 */
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
 }
 
 const {
   title,
-  description = 'レース車両開発エンジニア向け AI ツール情報ブログ。MBD・Simulink・CAE・走行データ解析に役立つ最新 AI 情報を発信。',
+  description = SITE.description,
   ogType = 'website',
   canonicalPath,
+  ogImage,
+  jsonLd,
 } = Astro.props;
 
-const siteOrigin = 'https://jonasaaydn.github.io';
-const base = '/mbd-ai-lab';
+const { origin: siteOrigin, base } = SITE;
 const canonicalUrl = canonicalPath
   ? `${siteOrigin}${base}${canonicalPath}`
   : `${siteOrigin}${base}/`;
-const pageTitle = `${title} | MBD×AI Lab`;
+const pageTitle = `${title} | ${SITE.title}`;
+const ogImageUrl = `${siteOrigin}${base}${ogImage ?? '/og-image.png'}`;
+
+// 全ページ共通の構造化データ（サイト + 運営組織）
+const siteLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: SITE.title,
+  alternateName: 'MBD AI Lab',
+  url: `${siteOrigin}${base}/`,
+  description: SITE.description,
+  inLanguage: 'ja',
+  publisher: {
+    '@type': 'Organization',
+    name: SITE.title,
+    logo: {
+      '@type': 'ImageObject',
+      url: ogImageUrl,
+    },
+  },
+};
+
+const jsonLdBlocks = [siteLd, ...(jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [])];
+const GA_ID = SITE.gaMeasurementId;
 ---
 
 <!doctype html>
@@ -31,6 +60,10 @@ const pageTitle = `${title} | MBD×AI Lab`;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    {SITE.googleSiteVerification && (
+      <meta name="google-site-verification" content={SITE.googleSiteVerification} />
+    )}
     <link rel="canonical" href={canonicalUrl} />
 
     <!-- OGP -->
@@ -38,16 +71,20 @@ const pageTitle = `${title} | MBD×AI Lab`;
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalUrl} />
-    <meta property="og:site_name" content="MBD×AI Lab" />
+    <meta property="og:site_name" content={SITE.title} />
     <meta property="og:locale" content="ja_JP" />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
 
     <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={pageTitle} />
     <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
 
     <title>{pageTitle}</title>
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href={`${base}/favicon.svg`} />
     <link rel="alternate" type="application/rss+xml" title="MBD×AI Lab RSS" href={`${base}/rss.xml`} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -55,6 +92,24 @@ const pageTitle = `${title} | MBD×AI Lab`;
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
+
+    <!-- 構造化データ -->
+    {jsonLdBlocks.map((block) => (
+      <script type="application/ld+json" set:html={JSON.stringify(block)} />
+    ))}
+
+    <!-- Google Analytics 4（測定IDが設定されている時だけ出力） -->
+    {GA_ID && (
+      <>
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}></script>
+        <script is:inline define:vars={{ GA_ID }}>
+          window.dataLayer = window.dataLayer || [];
+          function gtag() { dataLayer.push(arguments); }
+          gtag('js', new Date());
+          gtag('config', GA_ID);
+        </script>
+      </>
+    )}
   </head>
   <body>
     <Header />

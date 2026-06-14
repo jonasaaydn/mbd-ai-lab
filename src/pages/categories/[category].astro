@@ -26,7 +26,11 @@ const { categoryName, posts } = Astro.props;
 const description = CATEGORY_DESCRIPTIONS[categoryName] ?? '';
 ---
 
-<BaseLayout title={categoryName} description={description}>
+<BaseLayout
+  title={categoryName}
+  description={description}
+  canonicalPath={`/categories/${categoryToSlug(categoryName)}/`}
+>
   <div class="container">
     <div class="page-header">
       <div class="breadcrumb">

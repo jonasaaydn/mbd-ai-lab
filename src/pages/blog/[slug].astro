@@ -57,6 +57,52 @@ const seriesPosts = seriesPrefix
 const seriesIndex = seriesPosts.findIndex((p) => p.slug === post.slug);
 const prevPost = seriesIndex > 0 ? seriesPosts[seriesIndex - 1] : null;
 const nextPost = seriesIndex < seriesPosts.length - 1 ? seriesPosts[seriesIndex + 1] : null;
+
+// ── 構造化データ（JSON-LD）──
+const siteOrigin = 'https://jonasaaydn.github.io';
+const articleUrl = `${siteOrigin}${base}blog/${post.slug}/`;
+const ogImageUrl = `${siteOrigin}${base}og-image.png`;
+
+const articleLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: title,
+  description: summary,
+  datePublished: date.toISOString(),
+  dateModified: date.toISOString(),
+  inLanguage: 'ja',
+  mainEntityOfPage: { '@type': 'WebPage', '@id': articleUrl },
+  image: ogImageUrl,
+  author: { '@type': 'Organization', name: 'MBD×AI Lab' },
+  publisher: {
+    '@type': 'Organization',
+    name: 'MBD×AI Lab',
+    logo: { '@type': 'ImageObject', url: ogImageUrl },
+  },
+  keywords: tags.join(', '),
+  articleSection: category,
+};
+
+const breadcrumbLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'ホーム', item: `${siteOrigin}${base}` },
+    { '@type': 'ListItem', position: 2, name: '記事一覧', item: `${siteOrigin}${base}blog` },
+    { '@type': 'ListItem', position: 3, name: category, item: `${siteOrigin}${base}categories/${categoryToSlug(category)}` },
+    { '@type': 'ListItem', position: 4, name: title, item: articleUrl },
+  ],
+};
+
+// ── SNSシェアURL ──
+const encUrl = encodeURIComponent(articleUrl);
+const encTitle = encodeURIComponent(title);
+const shareLinks = {
+  x: `https://twitter.com/intent/tweet?text=${encTitle}&url=${encUrl}`,
+  line: `https://social-plugins.line.me/lineit/share?url=${encUrl}`,
+  hatena: `https://b.hatena.ne.jp/add?mode=confirm&url=${encUrl}&title=${encTitle}`,
+  facebook: `https://www.facebook.com/sharer/sharer.php?u=${encUrl}`,
+};
 ---
 
 <BaseLayout
@@ -64,6 +110,7 @@ const nextPost = seriesIndex < seriesPosts.length - 1 ? seriesPosts[seriesIndex 
   description={summary}
   ogType="article"
   canonicalPath={`/blog/${post.slug}/`}
+  jsonLd={[articleLd, breadcrumbLd]}
 >
   <article class="article-page">
     <div class="article-header-wrap">
@@ -129,6 +176,28 @@ const nextPost = seriesIndex < seriesPosts.length - 1 ? seriesPosts[seriesIndex 
     <div class="container article-layout">
       <div class="article-body prose" data-pagefind-body>
         <Content />
+
+        <div class="share-box" data-pagefind-ignore>
+          <span class="share-label">この記事をシェア</span>
+          <div class="share-buttons">
+            <a class="share-btn share-x" href={shareLinks.x} target="_blank" rel="noopener noreferrer" aria-label="Xでシェア">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M18.9 2H22l-7.3 8.3L23 22h-6.8l-5.3-7-6.1 7H1.7l7.8-8.9L1 2h6.9l4.8 6.4L18.9 2Zm-2.4 18h1.9L7.6 4H5.6l10.9 16Z"/></svg>
+              <span>X</span>
+            </a>
+            <a class="share-btn share-line" href={shareLinks.line} target="_blank" rel="noopener noreferrer" aria-label="LINEでシェア">
+              <span>LINE</span>
+            </a>
+            <a class="share-btn share-hatena" href={shareLinks.hatena} target="_blank" rel="noopener noreferrer" aria-label="はてなブックマークに追加">
+              <span>B!</span>
+            </a>
+            <a class="share-btn share-fb" href={shareLinks.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebookでシェア">
+              <span>Facebook</span>
+            </a>
+            <button class="share-btn share-copy" id="copy-link" type="button" data-url={articleUrl} aria-label="リンクをコピー">
+              <span>リンクをコピー</span>
+            </button>
+          </div>
+        </div>
       </div>
 
       <aside class="article-sidebar" data-pagefind-ignore>
@@ -244,6 +313,28 @@ const nextPost = seriesIndex < seriesPosts.length - 1 ? seriesPosts[seriesIndex 
     )}
   </article>
 </BaseLayout>
+
+<script>
+  const copyBtn = document.getElementById('copy-link');
+  copyBtn?.addEventListener('click', async () => {
+    const url = copyBtn.getAttribute('data-url') ?? location.href;
+    try {
+      await navigator.clipboard.writeText(url);
+      const label = copyBtn.querySelector('span');
+      if (label) {
+        const original = label.textContent;
+        label.textContent = 'コピーしました ✓';
+        copyBtn.classList.add('copied');
+        setTimeout(() => {
+          label.textContent = original;
+          copyBtn.classList.remove('copied');
+        }, 1800);
+      }
+    } catch {
+      /* クリップボード非対応環境では何もしない */
+    }
+  });
+</script>
 
 <style>
   .article-header-wrap {
@@ -535,6 +626,56 @@ const nextPost = seriesIndex < seriesPosts.length - 1 ? seriesPosts[seriesIndex 
     justify-content: center;
     font-size: 0.85rem;
   }
+
+  /* シェアボックス */
+  .share-box {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .share-label {
+    display: block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-text-subtle);
+    margin-bottom: 0.85rem;
+  }
+
+  .share-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .share-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.82rem;
+    font-weight: 600;
+    padding: 0.5em 0.9em;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border);
+    background: var(--color-bg);
+    color: var(--color-text);
+    cursor: pointer;
+    transition: transform 0.12s, box-shadow 0.12s, background 0.12s, color 0.12s, border-color 0.12s;
+  }
+
+  .share-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .share-x:hover { background: #000; color: #fff; border-color: #000; }
+  .share-line:hover { background: #06c755; color: #fff; border-color: #06c755; }
+  .share-hatena:hover { background: #00a4de; color: #fff; border-color: #00a4de; }
+  .share-fb:hover { background: #1877f2; color: #fff; border-color: #1877f2; }
+  .share-hatena span:first-child { font-weight: 800; }
+  .share-copy.copied { background: #16a34a; color: #fff; border-color: #16a34a; }
 
   /* シリーズバッジ */
   .series-badge {

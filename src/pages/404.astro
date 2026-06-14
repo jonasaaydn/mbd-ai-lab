@@ -1,0 +1,77 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+const base = import.meta.env.BASE_URL;
+---
+
+<BaseLayout title="ページが見つかりません" description="お探しのページは見つかりませんでした。">
+  <div class="container notfound">
+    <div class="nf-code">404</div>
+    <h1 class="nf-title">ページが見つかりません</h1>
+    <p class="nf-desc">
+      お探しのページは移動または削除された可能性があります。<br />
+      下のリンクから目的の情報を探せます。
+    </p>
+    <div class="nf-actions">
+      <a href={base} class="btn btn-primary">ホームへ戻る</a>
+      <a href={`${base}search`} class="btn btn-outline">記事を検索する</a>
+    </div>
+    <div class="nf-links">
+      <a href={`${base}blog`}>記事一覧</a>
+      <a href={`${base}blog?series=student-formula`}>学生フォーミュラ実践</a>
+      <a href={`${base}tools`}>AIツール一覧</a>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .notfound {
+    text-align: center;
+    padding: 5rem 1rem 6rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .nf-code {
+    font-size: clamp(4rem, 14vw, 8rem);
+    font-weight: 800;
+    line-height: 1;
+    color: var(--color-accent);
+    font-family: var(--font-mono);
+    letter-spacing: -0.04em;
+  }
+  .nf-title {
+    font-size: clamp(1.3rem, 4vw, 1.8rem);
+    color: var(--color-navy);
+    margin: 0.5rem 0;
+  }
+  .nf-desc {
+    color: var(--color-text-muted);
+    line-height: 1.8;
+    margin-bottom: 1rem;
+  }
+  .nf-actions {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 2rem;
+  }
+  .nf-links {
+    display: flex;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    font-size: 0.875rem;
+  }
+  .nf-links a {
+    color: var(--color-text-muted);
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    transition: color 0.15s, text-decoration-color 0.15s;
+  }
+  .nf-links a:hover {
+    color: var(--color-accent);
+    text-decoration-color: currentColor;
+  }
+</style>

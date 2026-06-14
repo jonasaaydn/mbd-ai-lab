@@ -1,6 +1,8 @@
 ---
 import { CATEGORIES } from '../utils/categories';
 import { categoryToSlug } from '../utils/categories';
+
+const base = import.meta.env.BASE_URL;
 ---
 
 <footer class="site-footer">
@@ -18,7 +20,7 @@ import { categoryToSlug } from '../utils/categories';
       <ul>
         {CATEGORIES.map((cat) => (
           <li>
-            <a href={`/categories/${categoryToSlug(cat)}`}>{cat}</a>
+            <a href={`${base}categories/${categoryToSlug(cat)}`}>{cat}</a>
           </li>
         ))}
       </ul>
@@ -27,9 +29,11 @@ import { categoryToSlug } from '../utils/categories';
     <div class="footer-nav">
       <h3 class="footer-nav-title">サイト</h3>
       <ul>
-        <li><a href="/">ホーム</a></li>
-        <li><a href="/blog">記事一覧</a></li>
-        <li><a href="/tools">AIツール一覧</a></li>
+        <li><a href={base}>ホーム</a></li>
+        <li><a href={`${base}blog`}>記事一覧</a></li>
+        <li><a href={`${base}tools`}>AIツール一覧</a></li>
+        <li><a href={`${base}search`}>記事検索</a></li>
+        <li><a href={`${base}rss.xml`}>RSS フィード</a></li>
       </ul>
     </div>
   </div>
