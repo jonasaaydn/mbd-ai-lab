@@ -242,15 +242,15 @@ export const tools: Tool[] = [
     tags: ['ISO 21434', 'TARA', 'Cybersecurity', 'Automotive', 'AUTOSAR', 'LLM'],
   },
   {
-    name: 'Sourcegraph Amp',
-    developer: 'Sourcegraph',
+    name: 'Amp',
+    developer: 'Amp Inc.（Sourcegraph spinoff）',
     category: 'AI Coding',
     description:
-      'Sourcegraphが提供する無料AIコーディングエージェント。VS Code・Cursor・Windsurf・JetBrains・CLIに対応し、MCP（Model Context Protocol）をビルトインサポート。2026年以降、MATLAB MCP ServerおよびSimulink Agentic Toolkitと正式に連携し、Simulinkモデルの参照モデル分割・加速器モード化・テストケース自動生成などのMBDワークフローを自律実行できる。Claude Code・GitHub Copilot Agentと同等のMBDスキルセットを完全無料（広告サポート）で利用できる点が最大の特徴。',
-    official_url: 'https://sourcegraph.com/amp',
+      '2025年12月にSourcegraphからスピンオフして独立したAIコーディングエージェント。CEO Quinn Slack（Sourcegraph共同創業者）率いるAmp Inc.が運営。AGENT.mdでプロジェクト固有ルールを学習し、Oracle（コードベース解析）・Librarian（外部ライブラリ）の専用サブエージェントが並列処理する。VS Code・CLIに対応し、MCP（Model Context Protocol）をビルトインサポート。MATLAB MCP ServerおよびSimulink Agentic Toolkitと連携し、Simulinkモデルの参照モデル分割・加速器モード化・テストケース自動生成などのMBDワークフローを自律実行できる。20万行JSモノレポで工数50%削減を実証。',
+    official_url: 'https://ampcode.com',
     use_cases: ['Simulinkモデル参照モデル分割', '加速器モード自動最適化', 'MATLABスクリプト自動リファクタリング', 'テストケース自動生成', 'コードグラフ活用の依存関係解析'],
     mbd_relevance: 'high',
-    tags: ['AI Agent', 'MCP', 'Simulink', 'MATLAB', 'Free', 'Refactoring', 'Coding'],
+    tags: ['AI Agent', 'MCP', 'Simulink', 'MATLAB', 'Refactoring', 'Coding', 'Sub-Agent'],
   },
   {
     name: 'Luminary Cloud SHIFT',
@@ -279,7 +279,7 @@ export const tools: Tool[] = [
     developer: 'JetBrains',
     category: 'AI Coding',
     description:
-      'JetBrainsが2026年3月に公開プレビューを開始したエージェント型開発環境（Agentic IDE）。Claude Agent・OpenAI Codex・Gemini CLI・Junieを単一プロジェクト内で同時並列実行でき、各エージェントが独立したGitワークツリーまたはDockerコンテナで作業する。MATLAB MCP Serverと組み合わせれば、制御設計・テスト生成・ドキュメント更新を複数AIが並行処理できる。macOS版は無料（プレビュー）、有料AI Proプラン（月$8）または自前APIキーで利用可能。',
+      'JetBrainsが2026年3月に公開プレビューを開始したエージェント型開発環境（Agentic IDE）。Claude Agent・OpenAI Codex・Gemini CLI・Junieを単一プロジェクト内で同時並列実行でき、各エージェントが独立したGitワークツリーまたはDockerコンテナで作業する。2026年6月にJetBrains Toolbox経由でLinux版が追加（macOS・Windows・Linux対応に）。MATLAB MCP Serverと組み合わせれば、制御設計・テスト生成・ドキュメント更新を複数AIが並行処理できる。プレビュー期間中は無料、JetBrains AI Proサブスクリプション（月$8）でClaude・Codex・Gemini・Junieを単一プランで利用可能。',
     official_url: 'https://air.dev',
     use_cases: ['複数AIエージェントのMBDタスク並列実行', 'MATLAB MCP経由での自律Simulink操作', 'Gitワークツリーによる安全な並列開発', 'CI/CDパイプラインへのJunie CLI統合', 'MCP経由での外部ツール連携'],
     mbd_relevance: 'high',
