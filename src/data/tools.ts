@@ -275,6 +275,28 @@ export const tools: Tool[] = [
     tags: ['CFD', 'Surrogate Model', 'Physics AI', 'Open Source', 'Transformer', 'Automotive', 'Aerodynamics'],
   },
   {
+    name: 'Altair HyperWorks',
+    developer: 'Altair Engineering（Siemens傘下）',
+    category: 'CAE / Simulation AI',
+    description:
+      'SiemensがAltair Engineering（約1.5兆円）を2025年に買収し、2025年12月にHyperWorks 2026をリリース。PhysicsAI（幾何深層学習サロゲート：450件のFEAから新形状を5秒で予測、最大1000倍高速）とromAI（GPU加速削減次元モデル：CFD/DEM/構造のリアルタイム予測）が統合された初のSiemens版。OptiStruct・HyperCrash・MotionSolve・EDEM・RapidMinerをSimcenter/Xceleratorと組み合わせ、構造→CFD→NVH→システムをひとつの環境で完結できる。電磁気シミュレーションは40%高速化、e-motor最適化・バッテリー安全解析にも対応。',
+    official_url: 'https://altair.com/hyperworks-2026',
+    use_cases: ['クラッシュ解析サロゲートモデル（5秒/件）', '構造トポロジー最適化×AI高速スクリーニング', 'CFD翼型1000点バリアント評価', 'NVH（振動・騒音）解析', 'e-motor多目的最適化'],
+    mbd_relevance: 'high',
+    tags: ['CAE', 'PhysicsAI', 'romAI', 'Surrogate Model', 'Topology Optimization', 'Siemens', 'GDL', 'NVH'],
+  },
+  {
+    name: 'Rescale AI Physics',
+    developer: 'Rescale Inc.',
+    category: 'CAE / Simulation AI',
+    description:
+      '2026年5月にAgentic Digital Engineering製品群を発表したクラウドHPC・AI物理プラットフォーム。AI Physicsモジュールはシミュレーションデータを入力とするサロゲートモデルをエンドツーエンドで構築・デプロイ（DoE生成→GPU並列シミュレーション→サロゲート訓練→最適化探索）。Agentic Digital Engineeringは入力バリデーション・トラブルシューティング・レポート生成・ハードウェア選定を自動化するAIエージェントを搭載。McLarenAutomotiveとのGTC 2026パートナーシップで複数物理ドメインを数時間で評価し専門家生産性3倍を実証。General Motors Motorsports・Samsung・米国防総省など大手顧客が採用。',
+    official_url: 'https://rescale.com/platform/ai-physics/',
+    use_cases: ['クラウドHPC並列シミュレーション', 'サロゲートモデルのエンドツーエンド構築', 'AIエージェントによる自動化ワークフロー', '設計候補4倍評価（AI Physicsによる加速）', 'McLaren事例：複数物理を数時間で評価'],
+    mbd_relevance: 'high',
+    tags: ['HPC', 'Cloud CAE', 'Surrogate Model', 'Agentic AI', 'DoE', 'Motorsport', 'McLaren'],
+  },
+  {
     name: 'JetBrains Air',
     developer: 'JetBrains',
     category: 'AI Coding',
