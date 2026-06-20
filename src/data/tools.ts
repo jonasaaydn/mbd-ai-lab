@@ -158,7 +158,7 @@ export const tools: Tool[] = [
     developer: 'PhysicsX Ltd.',
     category: 'CAE / Simulation AI',
     description:
-      '英国発の物理AIスタートアップ。NVIDIA NVenturesの追加出資を含む累計1.55億ドルを調達。20万超のジオメトリ・物理シミュレーションで訓練した「LGM-Aero（Large Geometry Model）」と2万件超の車両CFDデータセット「PXNetCar」でLargePhysicsModel（LPM）を構築。航空弾性シミュレーション向け世界初LPM「Ai.rplane」を無償デモ公開。2026年3月にはCoreWeaveクラウドで一般提供開始。NVIDIA GTC 2026では物理AI向けオープン標準策定を発表。',
+      '英国発の物理AIスタートアップ。2026年6月8日にTemasek主導で$300Mシリーズ（評価額$2.4B）を調達、累計4.55億ドル超。NVIDIA・Siemens・General Catalystも参加。20万超のジオメトリ・物理シミュレーションで訓練した「LGM-Aero（Large Geometry Model）」と2万件超の車両CFDデータセット「PXNetCar」でLargePhysicsModel（LPM）を構築。航空弾性シミュレーション向け世界初LPM「Ai.rplane」を無償デモ公開。2026年3月にはCoreWeaveクラウドで一般提供開始。NVIDIA GTC 2026では物理AI向けオープン標準策定を発表。',
     official_url: 'https://www.physicsx.ai',
     use_cases: ['自動車空力サロゲートモデル', 'ブレーキ冷却最適化', '航空弾性予測（Ai.rplane）', '形状設計スタディ高速化', 'CoreWeaveクラウドでの推論'],
     mbd_relevance: 'high',
