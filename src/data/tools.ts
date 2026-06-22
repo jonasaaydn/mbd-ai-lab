@@ -308,6 +308,17 @@ export const tools: Tool[] = [
     tags: ['Multi-Agent', 'MCP', 'Python', 'AutoGen', 'MATLAB', 'Simulink', 'Enterprise', 'Open Source'],
   },
   {
+    name: 'Google Antigravity',
+    developer: 'Google',
+    category: 'AI Coding',
+    description:
+      'Google I/O 2026（2026年5月19日）で発表、同年6月18日にGemini CLIの後継として正式リリースされたエージェントファースト開発プラットフォーム。CLI（agコマンド）・デスクトップApp・SDK・IDEの4コンポーネントで構成。Gemini 3.5 Flashをデフォルトモデルとして搭載し、並列サブエージェント・スラッシュコマンド（/goal /schedule）・Skillsパッケージをサポート。Go製シングルバイナリでランタイム依存なし。MCP統合でMATLAB MCPサーバーに接続し、Simulinkモデルの構築・シミュレーション実行・データ解析を自律的に実行できる。Gemini Code Assist（IDE拡張）も廃止され、Antigravity IDEに集約された。',
+    official_url: 'https://antigravity.google/',
+    use_cases: ['MATLAB MCP経由のSimulinkモデル自動操作', '並列サブエージェントによる複数ケース同時シミュレーション', 'MBDワークフロー自動化スクリプト生成', 'Gemini CLI からの移行', 'Google Cloud AgentPlatformへの本番デプロイ'],
+    mbd_relevance: 'high',
+    tags: ['AI Agent', 'CLI', 'MCP', 'MATLAB', 'Simulink', 'Google', 'Gemini', 'Multi-Agent'],
+  },
+  {
     name: 'JetBrains Air',
     developer: 'JetBrains',
     category: 'AI Coding',
