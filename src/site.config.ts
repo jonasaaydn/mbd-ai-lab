@@ -9,7 +9,7 @@ export const SITE = {
   // ── Google Analytics 4 ──
   // 測定ID（例: 'G-XXXXXXXXXX'）を入れると自動で計測タグが有効になる。
   // 空文字のあいだは一切タグを出力しない（プライバシー・パフォーマンスに影響なし）。
-  gaMeasurementId: '',
+  gaMeasurementId: 'G-BEC8KPCN74',
 
   // ── Google Search Console 所有権確認 ──
   // 「HTMLタグ」方式で表示される content="..." の値だけをここに貼る。
