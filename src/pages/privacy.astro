@@ -1,0 +1,143 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '../site.config';
+
+const base = import.meta.env.BASE_URL;
+const usesAnalytics = Boolean(SITE.gaMeasurementId);
+const usesAffiliate = Boolean(SITE.amazonStorefrontUrl);
+const updated = '2026-06-23';
+---
+
+<BaseLayout
+  title="プライバシーポリシー・広告表記"
+  description="MBD×AI Lab のプライバシーポリシー（アクセス解析・Cookie の利用）と広告（アフィリエイト）に関する表記です。"
+  canonicalPath="/privacy/"
+>
+  <article class="legal container">
+    <header class="legal-head">
+      <p class="legal-eyebrow">Privacy & Disclosure</p>
+      <h1>プライバシーポリシー・広告表記</h1>
+      <p class="legal-updated">最終更新日: {updated}</p>
+    </header>
+
+    <section class="legal-section">
+      <h2>運営</h2>
+      <p>
+        本サイト「MBD×AI Lab」（{SITE.origin}{SITE.base}/）は、レース車両開発の現場で働くMBDエンジニアが個人で運営する技術情報ブログです。
+      </p>
+    </section>
+
+    <section class="legal-section">
+      <h2>アクセス解析ツールについて</h2>
+      {usesAnalytics ? (
+        <p>
+          本サイトでは、サイトの利用状況を把握しコンテンツを改善するために、Google が提供するアクセス解析ツール
+          <strong>「Google アナリティクス」</strong>を利用しています。Google アナリティクスはトラフィックデータの収集のために
+          Cookie を使用します。このトラフィックデータは匿名で収集されており、個人を特定するものではありません。
+          ブラウザの設定で Cookie を無効にすることで、収集を拒否することができます。
+          この規約に関して詳しくは
+          <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener noreferrer">Google のポリシーと規約</a>
+          をご確認ください。
+        </p>
+      ) : (
+        <p>本サイトは現在、Cookie を用いたアクセス解析ツールを使用していません。</p>
+      )}
+    </section>
+
+    <section class="legal-section">
+      <h2>広告（アフィリエイトプログラム）について</h2>
+      {usesAffiliate ? (
+        <>
+          <p>
+            本サイトは、第三者が提供するアフィリエイトプログラム（Amazon アソシエイト・プログラム等）を利用しており、
+            これらを通じて商品・サービスを紹介し、紹介料を得る場合があります。
+          </p>
+          <p>
+            本サイトは Amazon.co.jp を宣伝しリンクすることによってサイトが紹介料を獲得できる手段を提供することを目的に設定された
+            アフィリエイトプログラムである、Amazon アソシエイト・プログラムの参加者です。
+            紹介する商品は、運営者が有用と判断したものですが、購入の最終判断はご自身の責任で行ってください。
+          </p>
+        </>
+      ) : (
+        <p>本サイトは現在、アフィリエイトプログラムによる広告を掲載していません（今後掲載する場合は、その旨を本ページに明記します）。</p>
+      )}
+    </section>
+
+    <section class="legal-section">
+      <h2>免責事項</h2>
+      <p>
+        本サイトの記事は、AI を活用して作成し、一次情報の明示・動作するコード・独自の比較といった品質基準のもとで公開していますが、
+        内容の正確性・完全性・有用性を保証するものではありません。掲載情報の利用によって生じたいかなる損害についても責任を負いかねます。
+        ツールの仕様・価格・URL は変更される場合があります。重要な判断の前には必ず公式情報をご確認ください。
+        記載の誤り・古い情報・リンク切れにお気づきの場合は、出典とあわせてご指摘いただけると幸いです。
+      </p>
+    </section>
+
+    <section class="legal-section">
+      <h2>著作権</h2>
+      <p>
+        本サイトに掲載されている文章・画像等の著作権は、運営者または正当な権利者に帰属します。
+        引用の際は出典として本サイトへのリンクを明記してください。
+      </p>
+    </section>
+
+    <div class="legal-actions">
+      <a href={`${base}about`} class="btn btn-outline">このサイトについて</a>
+      <a href={base} class="btn btn-primary">ホームへ</a>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .legal {
+    max-width: 760px;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+  .legal-head {
+    margin-bottom: 2.5rem;
+  }
+  .legal-eyebrow {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-accent);
+    margin: 0 0 0.5rem;
+  }
+  .legal-head h1 {
+    font-size: 1.8rem;
+    margin: 0 0 0.5rem;
+    color: var(--color-navy);
+  }
+  .legal-updated {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    margin: 0;
+  }
+  .legal-section {
+    margin-bottom: 2rem;
+  }
+  .legal-section h2 {
+    font-size: 1.2rem;
+    color: var(--color-navy);
+    border-left: 4px solid var(--color-accent);
+    padding-left: 0.65rem;
+    margin: 0 0 0.8rem;
+  }
+  .legal-section p {
+    line-height: 1.85;
+    color: var(--color-text);
+    margin: 0 0 0.75rem;
+  }
+  .legal-section a {
+    color: var(--color-accent);
+    text-decoration: underline;
+  }
+  .legal-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 2.5rem;
+  }
+</style>

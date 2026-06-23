@@ -11,6 +11,12 @@ const { tool, articleCount = 0, blogBase = '' } = Astro.props;
 
 const relevanceLabel = { high: 'MBD高関連', medium: '関連あり', low: '参考' }[tool.mbd_relevance];
 const relevanceClass = `relevance-${tool.mbd_relevance}`;
+
+// アフィリンクがあればそちらを優先し、検索エンジン向けに sponsored を付与
+const isAffiliate = Boolean(tool.affiliate_url);
+const linkUrl = tool.affiliate_url ?? tool.official_url;
+const linkRel = isAffiliate ? 'sponsored nofollow noopener' : 'noopener noreferrer';
+const linkLabel = isAffiliate ? '詳しく見る ↗' : '公式サイト ↗';
 ---
 
 <div class="tool-card">
@@ -44,12 +50,12 @@ const relevanceClass = `relevance-${tool.mbd_relevance}`;
       </a>
     )}
     <a
-      href={tool.official_url}
+      href={linkUrl}
       target="_blank"
-      rel="noopener noreferrer"
+      rel={linkRel}
       class="tool-link btn btn-outline"
     >
-      公式サイト ↗
+      {linkLabel}
     </a>
   </div>
 </div>

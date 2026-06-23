@@ -4,6 +4,8 @@ export interface Tool {
   category: string;
   description: string;
   official_url: string;
+  /** アフィリエイトリンク（任意）。設定時はカードのリンク先を公式URLからこちらに差し替え、rel に sponsored を付ける。 */
+  affiliate_url?: string;
   use_cases: string[];
   mbd_relevance: 'high' | 'medium' | 'low';
   tags: string[];

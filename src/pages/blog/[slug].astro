@@ -2,7 +2,9 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ArticleCard from '../../components/ArticleCard.astro';
+import ArticleCTA from '../../components/ArticleCTA.astro';
 import CategoryIllustration from '../../components/CategoryIllustration.astro';
+import { SITE } from '../../site.config';
 import { categoryToSlug } from '../../utils/categories';
 import { getReadingTime } from '../../utils/reading-time';
 
@@ -177,6 +179,8 @@ const shareLinks = {
       <div class="article-body prose" data-pagefind-body>
         <Content />
 
+        <ArticleCTA />
+
         <div class="share-box" data-pagefind-ignore>
           <span class="share-label">この記事をシェア</span>
           <div class="share-buttons">
@@ -253,6 +257,18 @@ const shareLinks = {
             )}
           </dl>
         </div>
+
+        {SITE.noteUrl && (
+          <div class="sidebar-card sidebar-note-card">
+            <h3 class="sidebar-title">note で深掘り</h3>
+            <p class="sidebar-note-text">
+              限定記事・実装の続き・質問への回答は note で公開しています。
+            </p>
+            <a href={SITE.noteUrl} target="_blank" rel="noopener noreferrer" class="btn btn-primary sidebar-note-btn">
+              note を見る →
+            </a>
+          </div>
+        )}
 
         <a href={`${base}blog`} class="btn btn-outline back-btn">← 記事一覧に戻る</a>
       </aside>
@@ -622,6 +638,22 @@ const shareLinks = {
   }
 
   .back-btn {
+    width: 100%;
+    justify-content: center;
+    font-size: 0.85rem;
+  }
+
+  .sidebar-note-card {
+    background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+    border-color: #dbe3ec;
+  }
+  .sidebar-note-text {
+    font-size: 0.82rem;
+    line-height: 1.7;
+    color: var(--color-text-muted);
+    margin: 0 0 0.85rem;
+  }
+  .sidebar-note-btn {
     width: 100%;
     justify-content: center;
     font-size: 0.85rem;

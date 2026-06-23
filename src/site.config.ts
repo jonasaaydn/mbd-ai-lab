@@ -15,4 +15,16 @@ export const SITE = {
   // 「HTMLタグ」方式で表示される content="..." の値だけをここに貼る。
   // 例: 'abcD1234...' （空文字なら何も出力しない）
   googleSiteVerification: 'MB0fOZd-Tv_QOs64LLhOXMLfu1Ci4zZuxeJgV0UY8g8',
+
+  // ── 収益化（空文字のあいだは該当する導線を一切表示しない）──
+  // note のプロフィール / マガジン URL（例: 'https://note.com/xxxx'）。
+  // 設定すると全記事の末尾とサイドバーに note 誘導 CTA が出る。
+  noteUrl: '',
+
+  // Amazon アソシエイトのストアフロント / おすすめリスト URL（例: 'https://www.amazon.co.jp/shop/xxxx'）。
+  // 設定すると全記事末尾に「おすすめの技術書」ブロック（広告表記つき）が出る。
+  amazonStorefrontUrl: '',
+
+  // 相談・コンサルの問い合わせ先 URL（フォーム/メール等）。将来用。空なら非表示。
+  contactUrl: '',
 } as const;
