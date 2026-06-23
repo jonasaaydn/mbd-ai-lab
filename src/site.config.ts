@@ -14,5 +14,5 @@ export const SITE = {
   // ── Google Search Console 所有権確認 ──
   // 「HTMLタグ」方式で表示される content="..." の値だけをここに貼る。
   // 例: 'abcD1234...' （空文字なら何も出力しない）
-  googleSiteVerification: '',
+  googleSiteVerification: 'MB0fOZd-Tv_QOs64LLhOXMLfu1Ci4zZuxeJgV0UY8g8',
 } as const;
